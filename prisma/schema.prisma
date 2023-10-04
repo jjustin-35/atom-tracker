@@ -1,0 +1,32 @@
+datasource db {
+    provider = "mongodb"
+    url      = env("MONGODB_URI")
+}
+
+generator client {
+    provider = "prisma-client-js"
+}
+
+model User {
+    id        String     @id @default(auto()) @map("_id") @db.ObjectId
+    createdAt DateTime   @default(now())
+    updatedAt DateTime   @updatedAt
+    email     String     @unique
+    name      String
+    password  String
+    avatar    String?
+    TimeNode  TimeNode[]
+}
+
+model TimeNode {
+    id        String   @id @default(auto()) @map("_id") @db.ObjectId
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+    start     DateTime
+    end       DateTime
+    date      DateTime
+    title     String
+    note      String?
+    type      String
+    user      User     @relation(fields: [id], references: [id])
+}
