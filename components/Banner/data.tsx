@@ -13,7 +13,7 @@ const data: DataType = {
     title: 'Atom Tracker',
     desc: '紀錄生活，管理時間，掌握時間的脈動',
     image: {
-      src: '/images/home/home-banner.svg',
+      src: '/images/home/img-home-banner.svg',
       alt: 'img-home-banner',
     },
   },
