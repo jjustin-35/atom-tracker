@@ -1,6 +1,6 @@
 'use client';
 
-import { AppBar, Toolbar, Typography, Button } from '@mui/material';
+import { AppBar, Toolbar, Typography } from '@mui/material';
 
 import Link from '../Link';
 import { Container } from '@/constants/styles';

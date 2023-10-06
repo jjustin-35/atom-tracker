@@ -10,22 +10,17 @@ type LinkProps = LinkType & {
 const Link = ({
   href,
   target,
-  isExternal,
+  isExternal = false,
   underline = 'none',
   children,
 }: LinkProps) => {
-  if (isExternal) {
-    const rel = target === '_blank' ? 'noopener noreferrer' : undefined;
-    return (
-      <MuiLink href={href} target={target} rel={rel} underline={underline}>
-        {children}
-      </MuiLink>
-    );
-  }
+  const rel = target === '_blank' ? 'noopener noreferrer' : undefined;
+  const component = isExternal ? 'a' : NextLink;
+  const linkTarget = isExternal ? target : undefined;
   return (
-    <NextLink href={href} legacyBehavior>
-      <MuiLink underline={underline}>{children}</MuiLink>
-    </NextLink>
+    <MuiLink href={href} component={component} target={linkTarget} rel={rel} underline={underline}>
+      {children}
+    </MuiLink>
   );
 };
 

@@ -22,6 +22,7 @@ const data: DataType = {
       color: 'primary',
       href: '/login',
       text: '開始使用',
+      size: 'large',
     },
   },
 };
