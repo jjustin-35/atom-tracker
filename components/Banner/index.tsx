@@ -1,6 +1,6 @@
 'use client';
 
-import { Typography } from '@mui/material';
+import { Typography, Button } from '@mui/material';
 
 import { Container } from '@/constants/styles';
 import { BannerWrapper, Image, Content } from './styled';
@@ -25,6 +25,11 @@ const Banner = ({ variant }: BannerProps) => {
             <Typography variant="body1" align="center" color="text">
               {data.desc}
             </Typography>
+          )}
+          {data.button && (
+            <Button {...data.button}>
+              {data.button.text}
+            </Button>
           )}
         </Content>
       </BannerWrapper>

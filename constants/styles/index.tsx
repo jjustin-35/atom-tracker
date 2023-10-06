@@ -2,6 +2,14 @@ import styled from '@emotion/styled';
 import { Container as MuiContainer } from '@mui/material';
 import { createTheme } from '@mui/material/styles';
 
+export const breakpointsValues = {
+  xs: 0,
+  sm: 768,
+  md: 1024,
+  lg: 1280,
+  xl: 1920,
+};
+
 export const theme = createTheme({
   palette: {
     primary: {
@@ -10,19 +18,25 @@ export const theme = createTheme({
     secondary: {
       main: '#f50057',
     },
-    text: {
-      primary: '#000000',
-      secondary: '#ffffff',
+  },
+  typography: {
+    h1: {
+      fontSize: '36px',
+      fontWeight: 700,
+      [`@media (min-width: ${breakpointsValues.md}px)`]: {
+        fontSize: '48px',
+      },
+    },
+    h2: {
+      fontSize: '28px',
+      fontWeight: 700,
+      [`@media (min-width: ${breakpointsValues.md}px)`]: {
+        fontSize: '32px',
+      },
     },
   },
   breakpoints: {
-    values: {
-      xs: 0,
-      sm: 768,
-      md: 1024,
-      lg: 1280,
-      xl: 1920,
-    },
+    values: breakpointsValues,
   },
 });
 
