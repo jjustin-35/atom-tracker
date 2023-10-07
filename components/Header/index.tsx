@@ -7,7 +7,7 @@ import Menu from './Menu';
 import dataset, { HeaderType } from './data';
 
 type HeaderProps = {
-  type: HeaderType;
+  type?: HeaderType;
 };
 
 const Header = ({ type = 'common' }: HeaderProps) => {

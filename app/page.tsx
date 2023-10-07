@@ -5,7 +5,7 @@ export default function Home() {
   const variant = 'home';
   return (
     <>
-      <Header />
+      <Header type='common' />
       <Banner variant={variant} />
     </>
   );
