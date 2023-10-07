@@ -7,6 +7,10 @@ export type BrandType = {
   text: string;
 };
 
+type MenuButtonType = ButtonType & {
+  buttonKey: 'signin' | 'signup';
+};
+
 type ActiveDeviceType = 'mobile' | 'desktop' | 'all';
 
 export type MenuType = {
@@ -19,7 +23,7 @@ export type MenuType = {
 export type HeaderDataType = {
   brand: BrandType;
   menu: MenuType[];
-  buttons: ButtonType[];
+  buttons: MenuButtonType[];
 };
 
 type DataType = Record<HeaderType, HeaderDataType>;
@@ -47,12 +51,14 @@ const data: DataType = {
     ],
     buttons: [
       {
+        buttonKey: 'signin',
         text: '登入',
         href: '/auth/login',
         variant: 'contained',
         color: 'secondary',
       },
       {
+        buttonKey: 'signup',
         text: '註冊',
         href: '/auth/register',
         color: 'inherit',

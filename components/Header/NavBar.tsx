@@ -1,6 +1,6 @@
 import { AppBar, Typography, IconButton, Button } from '@mui/material';
 import { Menu as MenuIcon } from '@mui/icons-material';
-
+import { signIn } from 'next-auth/react';
 import Link from '../Link';
 import { Container } from '@/constants/styles';
 import { BrandWrapper, Brand, Logo, Toolbar, ButtonGroup } from './styled';
@@ -30,27 +30,33 @@ const NavBrand = ({ brand }: NavBrandProps) => (
   </BrandWrapper>
 );
 
-const NavBar = ({ toggleDrawer, data, isOpen, isMobile }: NavBarProps) => (
-  <AppBar position="sticky">
-    <Container>
-      <Toolbar>
-        {isMobile && (
-          <IconButton color="inherit" onClick={() => toggleDrawer(!isOpen)}>
-            <MenuIcon />
-          </IconButton>
-        )}
-        {data.brand && <NavBrand brand={data.brand} />}
-        <ButtonGroup>
-          {!isMobile &&
-            data.buttons?.map((item, idx) => (
-              <Button {...item} key={idx}>
-                {item.text}
-              </Button>
-            ))}
-        </ButtonGroup>
-      </Toolbar>
-    </Container>
-  </AppBar>
-);
+const NavBar = ({ toggleDrawer, data, isOpen, isMobile }: NavBarProps) => {
+  const authHandler = (type?: 'signin' | 'signup') => {
+    if (type !== 'signin') return;
+    signIn();
+  };
+  return (
+    <AppBar position="sticky">
+      <Container>
+        <Toolbar>
+          {isMobile && (
+            <IconButton color="inherit" onClick={() => toggleDrawer(!isOpen)}>
+              <MenuIcon />
+            </IconButton>
+          )}
+          {data.brand && <NavBrand brand={data.brand} />}
+          <ButtonGroup>
+            {!isMobile &&
+              data.buttons?.map((item, idx) => (
+                <Button {...item} key={idx} onClick={() => authHandler(item.buttonKey)}>
+                  {item.text}
+                </Button>
+              ))}
+          </ButtonGroup>
+        </Toolbar>
+      </Container>
+    </AppBar>
+  );
+};
 
 export default NavBar;
