@@ -16,14 +16,10 @@ export type MenuType = {
   activeDevice?: ActiveDeviceType;
 };
 
-export type MenuButtonType = ButtonType & {
-  activeDevice?: ActiveDeviceType;
-};
-
 export type HeaderDataType = {
   brand: BrandType;
   menu: MenuType[];
-  buttons: MenuButtonType[];
+  buttons: ButtonType[];
 };
 
 type DataType = Record<HeaderType, HeaderDataType>;
@@ -53,12 +49,14 @@ const data: DataType = {
       {
         text: '登入',
         href: '/auth/login',
-        activeDevice: 'desktop',
+        variant: 'contained',
+        color: 'secondary',
       },
       {
         text: '註冊',
         href: '/auth/register',
-        activeDevice: 'desktop',
+        color: 'inherit',
+        variant: 'outlined',
       },
     ],
   },

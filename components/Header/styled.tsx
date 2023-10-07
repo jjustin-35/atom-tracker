@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import { Toolbar as MuiToolbar } from '@mui/material';
+import { Toolbar as MuiToolbar, Button as MuiButton } from '@mui/material';
 
 import { theme } from '@/constants/styles';
 
@@ -49,3 +49,4 @@ export const ButtonGroup = styled.div`
   display: flex;
   gap: 8px;
 `;
+

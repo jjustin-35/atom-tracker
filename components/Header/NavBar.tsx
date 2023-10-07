@@ -41,13 +41,12 @@ const NavBar = ({ toggleDrawer, data, isOpen, isMobile }: NavBarProps) => (
         )}
         {data.brand && <NavBrand brand={data.brand} />}
         <ButtonGroup>
-          {!isMobile && data.buttons?.map((item, idx) => (
-            <Button {...item} key={idx}>
-              <Typography variant="body1" color="#ffffff">
+          {!isMobile &&
+            data.buttons?.map((item, idx) => (
+              <Button {...item} key={idx}>
                 {item.text}
-              </Typography>
-            </Button>
-          ))}
+              </Button>
+            ))}
         </ButtonGroup>
       </Toolbar>
     </Container>
