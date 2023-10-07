@@ -38,8 +38,14 @@ export const Toolbar = styled(MuiToolbar)`
   padding: 0;
   gap: 16px;
   position: relative;
+  justify-content: space-between;
 `;
 
 export const MenuWrapper = styled.div`
   width: 250px;
+`;
+
+export const ButtonGroup = styled.div`
+  display: flex;
+  gap: 8px;
 `;

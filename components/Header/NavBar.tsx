@@ -1,10 +1,10 @@
-import { AppBar, Typography, IconButton } from '@mui/material';
+import { AppBar, Typography, IconButton, Button } from '@mui/material';
 import { Menu as MenuIcon } from '@mui/icons-material';
 
 import Link from '../Link';
 import { Container } from '@/constants/styles';
-import { BrandWrapper, Brand, Logo, Toolbar } from './styled';
-import { BrandType } from './data';
+import { BrandWrapper, Brand, Logo, Toolbar, ButtonGroup } from './styled';
+import { HeaderDataType, BrandType } from './data';
 
 type NavBrandProps = {
   brand: BrandType;
@@ -13,7 +13,8 @@ type NavBrandProps = {
 type NavBarProps = {
   toggleDrawer: (boolean: boolean) => void;
   isOpen: boolean;
-  brand?: BrandType;
+  isMobile?: boolean;
+  data: HeaderDataType;
 };
 
 const NavBrand = ({ brand }: NavBrandProps) => (
@@ -29,14 +30,25 @@ const NavBrand = ({ brand }: NavBrandProps) => (
   </BrandWrapper>
 );
 
-const NavBar = ({ toggleDrawer, isOpen, brand }: NavBarProps) => (
+const NavBar = ({ toggleDrawer, data, isOpen, isMobile }: NavBarProps) => (
   <AppBar position="sticky">
     <Container>
       <Toolbar>
-        <IconButton color="inherit" onClick={() => toggleDrawer(!isOpen)}>
-          <MenuIcon />
-        </IconButton>
-        {brand && <NavBrand brand={brand} />}
+        {isMobile && (
+          <IconButton color="inherit" onClick={() => toggleDrawer(!isOpen)}>
+            <MenuIcon />
+          </IconButton>
+        )}
+        {data.brand && <NavBrand brand={data.brand} />}
+        <ButtonGroup>
+          {!isMobile && data.buttons?.map((item, idx) => (
+            <Button {...item} key={idx}>
+              <Typography variant="body1" color="#ffffff">
+                {item.text}
+              </Typography>
+            </Button>
+          ))}
+        </ButtonGroup>
       </Toolbar>
     </Container>
   </AppBar>
