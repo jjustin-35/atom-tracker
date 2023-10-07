@@ -1,27 +1,34 @@
 'use client';
 
-import { AppBar, Toolbar, Typography } from '@mui/material';
+import { useState } from 'react';
+import { SwipeableDrawer } from '@mui/material';
+import NavBar from './NavBar';
+import Menu from './Menu';
+import dataset, { HeaderType } from './data';
 
-import Link from '../Link';
-import { Container } from '@/constants/styles';
-import { Brand, Logo } from './styled';
+type HeaderProps = {
+  type: HeaderType;
+};
 
-const Header = () => {
+const Header = ({ type = 'common' }: HeaderProps) => {
+  const data = dataset[type];
+  const [isOpen, setIsOpen] = useState(false);
+
+  const toggleDrawer = (boolean: boolean) => {
+    setIsOpen(boolean);
+  };
   return (
-    <AppBar position='sticky'>
-      <Container>
-        <Toolbar>
-          <Link href="/">
-            <Brand>
-              <Logo src="/images/icon/ic-logo-white.svg" alt="ic-logo" />
-              <Typography variant="h6" color="#ffffff">
-                Atom Tracker
-              </Typography>
-            </Brand>
-          </Link>
-        </Toolbar>
-      </Container>
-    </AppBar>
+    <>
+      <NavBar toggleDrawer={toggleDrawer} isOpen={isOpen} brand={data.brand} />
+      <SwipeableDrawer
+        anchor="left"
+        open={isOpen}
+        onClose={() => toggleDrawer(false)}
+        onOpen={() => toggleDrawer(true)}
+      >
+        <Menu data={data.menu} />
+      </SwipeableDrawer>
+    </>
   );
 };
 

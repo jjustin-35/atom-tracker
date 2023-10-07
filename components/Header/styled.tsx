@@ -1,14 +1,45 @@
 import styled from '@emotion/styled';
+import { Toolbar as MuiToolbar } from '@mui/material';
 
 import { theme } from '@/constants/styles';
+
+export const BrandWrapper = styled.div`
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  white-space: nowrap;
+
+  ${theme.breakpoints.up('md')} {
+    position: relative;
+    top: auto;
+    left: auto;
+    transform: none;
+  }
+`;
 
 export const Brand = styled.div`
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 8px;
 `;
 
 export const Logo = styled.img`
-  width: 40px;
-  height: 40px;
+  width: 28px;
+  height: 28px;
+
+  ${theme.breakpoints.up('md')} {
+    width: 40px;
+    height: 40px;
+  }
+`;
+
+export const Toolbar = styled(MuiToolbar)`
+  padding: 0;
+  gap: 16px;
+  position: relative;
+`;
+
+export const MenuWrapper = styled.div`
+  width: 250px;
 `;
