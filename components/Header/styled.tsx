@@ -46,7 +46,11 @@ export const MenuWrapper = styled.div`
 `;
 
 export const ButtonGroup = styled.div`
-  display: flex;
+  display: none;
   gap: 8px;
+
+  ${theme.breakpoints.up('md')} {
+    display: flex;
+  }
 `;
 

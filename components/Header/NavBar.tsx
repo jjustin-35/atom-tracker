@@ -39,19 +39,28 @@ const NavBar = ({ toggleDrawer, data, isOpen, isMobile }: NavBarProps) => {
     <AppBar position="sticky">
       <Container>
         <Toolbar>
-          {isMobile && (
-            <IconButton color="inherit" onClick={() => toggleDrawer(!isOpen)}>
-              <MenuIcon />
-            </IconButton>
-          )}
+          <IconButton
+            color="inherit"
+            onClick={() => toggleDrawer(!isOpen)}
+            sx={{
+              display: {
+                md: 'none',
+              },
+            }}
+          >
+            <MenuIcon />
+          </IconButton>
           {data.brand && <NavBrand brand={data.brand} />}
           <ButtonGroup>
-            {!isMobile &&
-              data.buttons?.map((item, idx) => (
-                <Button {...item} key={idx} onClick={() => authHandler(item.buttonKey)}>
-                  {item.text}
-                </Button>
-              ))}
+            {data.buttons?.map((item, idx) => (
+              <Button
+                {...item}
+                key={idx}
+                onClick={() => authHandler(item.buttonKey)}
+              >
+                {item.text}
+              </Button>
+            ))}
           </ButtonGroup>
         </Toolbar>
       </Container>
