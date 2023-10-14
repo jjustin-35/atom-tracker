@@ -1,4 +1,4 @@
-import { ButtonProps } from '@mui/material';
+import { ButtonProps, TextFieldProps } from '@mui/material';
 
 export type ImageType = {
   src: string;
@@ -14,4 +14,8 @@ export type LinkType = {
 
 export type ButtonType = ButtonProps & {
   text: string;
+};
+
+export type FieldType = TextFieldProps & {
+  errorMessage: string;
 };

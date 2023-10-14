@@ -1,32 +1,25 @@
 import { TextField, MenuItem } from '@mui/material';
 
-import type { FieldType } from '@/constants/types/field';
+import { FieldType } from '@/constants/types/global';
 
 type SelectProps = FieldType & {
-  errorMessage: string;
   options: { value: string; label: string }[];
 };
 
-const SelectContainer = ({
+const Select = ({
   options,
   errorMessage,
   onBlur,
   onChange,
-  handleFormData,
-  validate,
-  handleError,
   ...inputProps
-}: SelectProps) => {
-    
-  return (
-    <TextField select {...inputProps}>
-      {options.map((option) => (
-        <MenuItem key={option.value} value={option.value}>
-          {option.label}
-        </MenuItem>
-      ))}
-    </TextField>
-  );
-};
+}: SelectProps) => (
+  <TextField select onBlur={onBlur} onChange={onChange} {...inputProps}>
+    {options.map((option) => (
+      <MenuItem key={option.value} value={option.value}>
+        {option.label}
+      </MenuItem>
+    ))}
+  </TextField>
+);
 
-export default SelectContainer;
+export default Select;

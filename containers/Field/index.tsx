@@ -2,17 +2,25 @@
 
 import React, { useEffect } from 'react';
 
-import type { FieldType } from '@/constants/types/field';
-
 import Select from '../../components/Field/Select';
 import TextField from '../../components/Field/TextField';
 
-type SelectProps = FieldType & {
+type ErrorType = Record<string, string>;
+
+export type TextFieldProps = {
+  errors: ErrorType;
+  isReset: boolean;
+  handleFormData: (data: Record<string, string | number>) => void;
+  validate: (value: string) => string;
+  handleError: (data: Record<string, string>) => void;
+} & React.ComponentProps<typeof TextField>;
+
+export type SelectProps = TextFieldProps & {
   type: 'select';
   options: { value: string; label: string }[];
 };
 
-type FieldProps = FieldType | SelectProps;
+type FieldProps = TextFieldProps | SelectProps;
 
 const Field = ({
   type,
@@ -65,7 +73,7 @@ const Field = ({
       errorMessage={errorMessage}
       onChange={changeHandler}
       onBlur={blurHandler}
-      {...(inputProps as FieldType)}
+      {...(inputProps as TextFieldProps)}
     />
   );
 };
