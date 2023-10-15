@@ -1,11 +1,11 @@
 'use client';
 
-import { Button } from '@mui/material';
+import { Button, Typography } from '@mui/material';
 
 import Form, { FormComponentProps } from '@/containers/Form';
 import Field from '@/containers/Field';
 import { Container } from '@/constants/styles';
-import { FormCompWrapper, Wrapper } from './styled';
+import { FormCompWrapper, Wrapper, Outer } from './styled';
 import dataset from './data';
 
 type Props = {
@@ -42,9 +42,14 @@ const AuthForm = ({ variant }: Props) => {
   const data = dataset[variant];
   return (
     <Container>
-      <Wrapper>
-        <Form data={data} FormComponent={FormComponent} />
-      </Wrapper>
+      <Outer>
+        <Wrapper>
+          <Typography variant="h2" align="center" color="#000000">
+            {data.title}
+          </Typography>
+          <Form data={data} FormComponent={FormComponent} />
+        </Wrapper>
+      </Outer>
     </Container>
   );
 };

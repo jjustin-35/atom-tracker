@@ -1,6 +1,7 @@
 import { FieldType } from '@/constants/types/global';
 
 type AuthFormType = {
+  title: string;
   fields: FieldType[];
 };
 
@@ -8,6 +9,7 @@ type DataType = Record<string, AuthFormType>;
 
 const data: DataType = {
   signin: {
+    title: '登入',
     fields: [
       {
         type: 'email',
@@ -24,6 +26,7 @@ const data: DataType = {
     ],
   },
   signup: {
+    title: '註冊',
     fields: [
       {
         type: 'text',

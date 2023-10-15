@@ -7,7 +7,16 @@ export const FormCompWrapper = styled.div`
 `;
 
 export const Wrapper = styled.div`
-  height: 100%;
-  margin: auto 0;
-  padding: 40px 24px;
+  width: 100%;
+  padding: 40px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+`;
+
+export const Outer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
 `;
