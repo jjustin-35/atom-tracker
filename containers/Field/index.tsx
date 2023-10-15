@@ -2,32 +2,20 @@
 
 import React, { useEffect } from 'react';
 
+import type { TextFieldType, SelectType } from '@/constants/types/global';
+
+import validate from '@/helpers/validate';
+import { isEmptyObj } from '@/helpers/object';
 import Select from '../../components/Field/Select';
 import TextField from '../../components/Field/TextField';
 
-type ErrorType = Record<string, string>;
-
-export type TextFieldProps = {
-  errors: ErrorType;
-  isReset: boolean;
-  handleFormData: (data: Record<string, string | number>) => void;
-  validate: (value: string) => string;
-  handleError: (data: Record<string, string>) => void;
-} & React.ComponentProps<typeof TextField>;
-
-export type SelectProps = TextFieldProps & {
-  type: 'select';
-  options: { value: string; label: string }[];
-};
-
-type FieldProps = TextFieldProps | SelectProps;
+type FieldProps = TextFieldType | SelectType;
 
 const Field = ({
   type,
   errors,
   isReset,
   handleFormData,
-  validate,
   handleError,
   ...inputProps
 }: FieldProps) => {
@@ -38,9 +26,15 @@ const Field = ({
   };
 
   const blurHandler = (e: React.FocusEvent<HTMLInputElement>) => {
-    const error = validate(e.target.value);
-    handleError({ [inputProps.name]: error });
-    if (error) {
+    const fieldData = { name: inputProps.name, value: e.target.value };
+    const error = validate({
+      fieldData,
+      type,
+      isRequired: inputProps.required,
+    });
+
+    handleError(error);
+    if (isEmptyObj(error)) {
       handleFormData({ [inputProps.name]: '' });
     }
   };
@@ -62,8 +56,10 @@ const Field = ({
         type={type}
         errorMessage={errorMessage}
         onChange={changeHandler}
-        onBlur={blurHandler}
-        {...(inputProps as SelectProps)}
+        inputProps={{
+          onBlur: blurHandler,
+        }}
+        {...(inputProps as SelectType)}
       />
     );
   }
@@ -72,8 +68,10 @@ const Field = ({
       type={type}
       errorMessage={errorMessage}
       onChange={changeHandler}
-      onBlur={blurHandler}
-      {...(inputProps as TextFieldProps)}
+      inputProps={{
+        onBlur: blurHandler,
+      }}
+      {...(inputProps as TextFieldType)}
     />
   );
 };

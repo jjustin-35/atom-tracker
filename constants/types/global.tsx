@@ -17,5 +17,19 @@ export type ButtonType = ButtonProps & {
 };
 
 export type FieldType = TextFieldProps & {
-  errorMessage: string;
+  errorMessage?: string;
+};
+
+type ErrorType = Record<string, string>;
+
+export type TextFieldType = {
+  errors: ErrorType;
+  isReset: boolean;
+  handleFormData: (data: Record<string, string | number>) => void;
+  handleError: (data: Record<string, string>) => void;
+} & TextFieldProps;
+
+export type SelectType = TextFieldType & {
+  type: 'select';
+  options: { value: string; label: string }[];
 };
