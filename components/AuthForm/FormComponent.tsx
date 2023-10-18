@@ -3,7 +3,7 @@ import { Button, Typography, Divider } from '@mui/material';
 import useForm from '@/helpers/useForm';
 import Link from '../Link';
 import Field from '@/containers/Field';
-import { FormCompWrapper, Hint } from './styled';
+import { FormCompWrapper, Hint, Image } from './styled';
 import { FormType } from './data';
 
 const FormComponent = ({ data }: { data: FormType }) => {

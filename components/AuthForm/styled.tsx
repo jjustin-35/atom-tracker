@@ -47,6 +47,10 @@ export const Icon = styled.img`
   }
 `;
 
+export const Image = styled.img`
+  height: 60px;
+`;
+
 export const Hint = styled.div`
   display: flex;
   justify-content: space-between;
