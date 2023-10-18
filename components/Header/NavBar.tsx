@@ -52,15 +52,18 @@ const NavBar = ({ toggleDrawer, data, isOpen, isMobile }: NavBarProps) => {
           </IconButton>
           {data.brand && <NavBrand brand={data.brand} />}
           <ButtonGroup>
-            {data.buttons?.map((item, idx) => (
-              <Button
-                {...item}
-                key={idx}
-                onClick={() => authHandler(item.buttonKey)}
-              >
-                {item.text}
-              </Button>
-            ))}
+            {data.buttons?.map((item, idx) => {
+              const { buttonKey, ...rest } = item;
+              return (
+                <Button
+                  {...rest}
+                  key={idx}
+                  onClick={() => authHandler(buttonKey)}
+                >
+                  {item.text}
+                </Button>
+              );
+            })}
           </ButtonGroup>
         </Toolbar>
       </Container>

@@ -37,7 +37,7 @@ const data: DataType = {
       },
       {
         text: '還沒有帳號?',
-        link: '/signup',
+        link: '/auth/signup',
       },
     ],
   },
@@ -67,6 +67,12 @@ const data: DataType = {
         name: 'confirmPassword',
         label: 'Confirm Password',
         placeholder: 'Confirm Password',
+      },
+    ],
+    hint: [
+      {
+        text: '已經有帳號?',
+        link: '/auth/signin',
       },
     ],
   },

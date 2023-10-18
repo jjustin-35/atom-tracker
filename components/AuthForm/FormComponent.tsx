@@ -48,21 +48,26 @@ const FormComponent = ({ data, variant }: Props) => {
             </Link>
           ))}
         </Hint>
-        <Divider variant="middle" />
         {variant === 'signin' && (
-          <AuthButtonGroup>
-            <GoogleButton variant="contained" onClick={() => signIn('google')}>
-              <Image src="/images/auth/google-icon.svg" alt="ic-google" />
-              Sign in with Google
-            </GoogleButton>
-            <FacebookButton
-              variant="contained"
-              onClick={() => signIn('facebook')}
-            >
-              <Image src="/images/auth/facebook-icon.svg" alt="ic-facebook" />
-              Sign in with Facebook
-            </FacebookButton>
-          </AuthButtonGroup>
+          <>
+            <Divider variant="middle" />
+            <AuthButtonGroup>
+              <GoogleButton
+                variant="contained"
+                onClick={() => signIn('google')}
+              >
+                <Image src="/images/auth/google-icon.svg" alt="ic-google" />
+                Sign in with Google
+              </GoogleButton>
+              <FacebookButton
+                variant="contained"
+                onClick={() => signIn('facebook')}
+              >
+                <Image src="/images/auth/facebook-icon.svg" alt="ic-facebook" />
+                Sign in with Facebook
+              </FacebookButton>
+            </AuthButtonGroup>
+          </>
         )}
       </FormCompWrapper>
     </form>

@@ -16,7 +16,7 @@ type ActiveDeviceType = 'mobile' | 'desktop' | 'all';
 export type MenuType = {
   key: string;
   text: string;
-  href: string;
+  href?: string;
   icon?: ImageType;
   activeDevice?: ActiveDeviceType;
 };
@@ -42,13 +42,12 @@ const data: DataType = {
       {
         key: 'signin',
         text: '登入',
-        href: '/auth/login',
         activeDevice: 'mobile',
       },
       {
         key: 'signup',
         text: '註冊',
-        href: '/auth/register',
+        href: '/auth/signup',
         activeDevice: 'mobile',
       },
     ],
@@ -63,6 +62,7 @@ const data: DataType = {
         buttonKey: 'signup',
         text: '註冊',
         color: 'inherit',
+        href: '/auth/signup',
         variant: 'outlined',
       },
     ],
