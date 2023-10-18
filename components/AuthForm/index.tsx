@@ -2,7 +2,6 @@
 
 import { Typography } from '@mui/material';
 
-import Form from '@/containers/Form';
 import FormComponent from './FormComponent';
 import { Container } from '@/constants/styles';
 import { Outer, Wrapper, Inner, Icon } from './styled';
@@ -23,7 +22,7 @@ const AuthForm = ({ variant }: Props) => {
             <Typography variant="h2" align="center" color="#000000">
               {data.title}
             </Typography>
-            <Form data={data} FormComponent={FormComponent} />
+            <FormComponent data={data} />
           </Inner>
         </Wrapper>
       </Container>
