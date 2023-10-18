@@ -70,6 +70,7 @@ export const AuthButtonGroup = styled.div`
 export const GoogleButton = styled(Button)`
   background-color: white;
   color: black;
+  justify-content: flex-start;
   :hover {
     background-color: white;
   }
@@ -78,6 +79,7 @@ export const GoogleButton = styled(Button)`
 export const FacebookButton = styled(Button)`
   background-color: #1877f2;
   color: white;
+  justify-content: flex-start;
   :hover {
     background-color: #1877f2;
   }
