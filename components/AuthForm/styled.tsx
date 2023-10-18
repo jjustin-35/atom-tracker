@@ -1,4 +1,5 @@
 import styled from '@emotion/styled';
+import { Button } from '@mui/material';
 import { theme } from '@/constants/styles';
 
 export const FormCompWrapper = styled.div`
@@ -48,11 +49,36 @@ export const Icon = styled.img`
 `;
 
 export const Image = styled.img`
-  height: 60px;
+  width: 18px;
+  height: 18px;
+  margin-right: 24px;
 `;
 
 export const Hint = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+`;
+
+export const AuthButtonGroup = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 12px;
+`;
+
+export const GoogleButton = styled(Button)`
+  background-color: white;
+  color: black;
+  :hover {
+    background-color: white;
+  }
+`;
+
+export const FacebookButton = styled(Button)`
+  background-color: #1877f2;
+  color: white;
+  :hover {
+    background-color: #1877f2;
+  }
 `;

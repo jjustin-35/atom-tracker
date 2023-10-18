@@ -1,14 +1,28 @@
 import { Button, Typography, Divider } from '@mui/material';
+import { signIn } from 'next-auth/react';
 
 import useForm from '@/helpers/useForm';
 import Link from '../Link';
 import Field from '@/containers/Field';
-import { FormCompWrapper, Hint, Image } from './styled';
+import {
+  FormCompWrapper,
+  Hint,
+  Image,
+  AuthButtonGroup,
+  GoogleButton,
+  FacebookButton,
+} from './styled';
 import { FormType } from './data';
 
-const FormComponent = ({ data }: { data: FormType }) => {
+type Props = {
+  data: FormType;
+  variant: 'signin' | 'signup';
+};
+
+const FormComponent = ({ data, variant }: Props) => {
   const { isReset, errors, handleFormData, handleError, submitHandler } =
     useForm(data.fields);
+
   return (
     <form onSubmit={submitHandler}>
       <FormCompWrapper>
@@ -35,12 +49,21 @@ const FormComponent = ({ data }: { data: FormType }) => {
           ))}
         </Hint>
         <Divider variant="middle" />
-        <Button
-          variant="contained"
-          sx={{ backgroundColor: 'white', color: 'black' }}
-        >
-          Sign in with Google
-        </Button>
+        {variant === 'signin' && (
+          <AuthButtonGroup>
+            <GoogleButton variant="contained" onClick={() => signIn('google')}>
+              <Image src="/images/auth/google-icon.svg" alt="ic-google" />
+              Sign in with Google
+            </GoogleButton>
+            <FacebookButton
+              variant="contained"
+              onClick={() => signIn('facebook')}
+            >
+              <Image src="/images/auth/facebook-icon.svg" alt="ic-facebook" />
+              Sign in with Facebook
+            </FacebookButton>
+          </AuthButtonGroup>
+        )}
       </FormCompWrapper>
     </form>
   );

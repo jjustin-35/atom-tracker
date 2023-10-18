@@ -22,7 +22,7 @@ const AuthForm = ({ variant }: Props) => {
             <Typography variant="h2" align="center" color="#000000">
               {data.title}
             </Typography>
-            <FormComponent data={data} />
+            <FormComponent data={data} variant={variant} />
           </Inner>
         </Wrapper>
       </Container>
