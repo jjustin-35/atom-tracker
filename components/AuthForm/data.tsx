@@ -1,11 +1,17 @@
 import { FieldType } from '@/constants/types/global';
 
-type AuthFormType = {
-  title: string;
-  fields: FieldType[];
+type HintType = {
+  text: string;
+  link?: string;
 };
 
-type DataType = Record<string, AuthFormType>;
+export type FormType = {
+  title: string;
+  fields: FieldType[];
+  hint?: HintType[];
+};
+
+type DataType = Record<string, FormType>;
 
 const data: DataType = {
   signin: {
@@ -22,6 +28,16 @@ const data: DataType = {
         name: 'password',
         label: 'Password',
         required: true,
+      },
+    ],
+    hint: [
+      {
+        text: '忘記密碼?',
+        link: '',
+      },
+      {
+        text: '還沒有帳號?',
+        link: '/signup',
       },
     ],
   },

@@ -30,5 +30,25 @@ export const Wrapper = styled.div`
 export const Outer = styled.section`
   width: 100vw;
   height: 100vh;
-  background-image: linear-gradient(${theme.palette.primary.light}, ${theme.palette.primary.main});
+  background-image: linear-gradient(
+    ${theme.palette.primary.light},
+    ${theme.palette.primary.main}
+  );
+`;
+
+export const Icon = styled.img`
+  width: 60px;
+  height: 60px;
+  margin: 0 auto;
+
+  ${theme.breakpoints.up('sm')} {
+    width: 80px;
+    height: 80px;
+  }
+`;
+
+export const Hint = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 `;

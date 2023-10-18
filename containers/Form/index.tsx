@@ -5,8 +5,15 @@ import type { FieldType } from '@/constants/types/global';
 import validate from '@/helpers/validate';
 import { isEmptyObj } from '@/helpers/object';
 
-type DataType = {
+type HintType = {
+  text: string;
+  link?: string;
+};
+
+export type DataType = {
+  title: string;
   fields: FieldType[];
+  hint?: HintType[];
 };
 
 export type FormComponentProps = {

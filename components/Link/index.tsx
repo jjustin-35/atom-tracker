@@ -18,7 +18,14 @@ const Link = ({
   const component = isExternal ? 'a' : NextLink;
   const linkTarget = isExternal ? target : undefined;
   return (
-    <MuiLink href={href} component={component} target={linkTarget} rel={rel} underline={underline}>
+    <MuiLink
+      href={href}
+      component={component}
+      target={linkTarget}
+      rel={rel}
+      underline={underline}
+      color="inherit"
+    >
       {children}
     </MuiLink>
   );

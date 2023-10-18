@@ -41,6 +41,15 @@ export const theme = createTheme({
   breakpoints: {
     values: breakpointsValues,
   },
+  components: {
+    MuiButton: {
+      styleOverrides: {
+        root: {
+          textTransform: 'none',
+        },
+      },
+    },
+  },
 });
 
 export const Container = styled(MuiContainer)`
