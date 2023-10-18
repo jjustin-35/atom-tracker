@@ -32,7 +32,10 @@ const Menu = ({ data }: MenuProps) => {
       <List>
         {items.map((item) => (
           <ListItem key={item.text} disablePadding>
-            <ListItemButton onClick={() => clickHandler(item.key)}>
+            <ListItemButton
+              href={item.href}
+              onClick={() => clickHandler(item.key)}
+            >
               <ListItemText primary={item.text} />
             </ListItemButton>
           </ListItem>
