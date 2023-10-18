@@ -5,7 +5,7 @@ import { Button, Typography } from '@mui/material';
 import Form, { FormComponentProps } from '@/containers/Form';
 import Field from '@/containers/Field';
 import { Container } from '@/constants/styles';
-import { FormCompWrapper, Wrapper, Outer } from './styled';
+import { FormCompWrapper, Outer, Wrapper, Inner } from './styled';
 import dataset from './data';
 
 type Props = {
@@ -41,16 +41,18 @@ const FormComponent = ({
 const AuthForm = ({ variant }: Props) => {
   const data = dataset[variant];
   return (
-    <Container>
-      <Outer>
+    <Outer>
+      <Container>
         <Wrapper>
-          <Typography variant="h2" align="center" color="#000000">
-            {data.title}
-          </Typography>
-          <Form data={data} FormComponent={FormComponent} />
+          <Inner>
+            <Typography variant="h2" align="center" color="#000000">
+              {data.title}
+            </Typography>
+            <Form data={data} FormComponent={FormComponent} />
+          </Inner>
         </Wrapper>
-      </Outer>
-    </Container>
+      </Container>
+    </Outer>
   );
 };
 
