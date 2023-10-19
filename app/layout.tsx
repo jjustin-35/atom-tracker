@@ -4,6 +4,7 @@ import { getServerSession } from 'next-auth/next';
 import { authOptions } from './api/auth/[...nextauth]/route';
 import ThemeRegistry from '@/lib/ThemeProvider';
 import NextAuthProvider from '@/lib/nextAuthProvider';
+import ReduxProvider from '@/lib/ReduxProvider';
 import meta from '@/constants/meta';
 
 export const metadata: Metadata = meta.default;
@@ -18,7 +19,9 @@ export default async function RootLayout({
     <html lang="zh-tw">
       <body>
         <NextAuthProvider session={session}>
-          <ThemeRegistry options={{ key: 'mui' }}>{children}</ThemeRegistry>
+          <ReduxProvider>
+            <ThemeRegistry options={{ key: 'mui' }}>{children}</ThemeRegistry>
+          </ReduxProvider>
         </NextAuthProvider>
       </body>
     </html>

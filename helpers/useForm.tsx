@@ -6,7 +6,7 @@ import validate from './validate';
 import { isEmptyObj } from './object';
 
 
-const useForm = (data: FieldType[]) => {
+const useForm = (data: FieldType[], onSubmit: (data: Record<string, string | number>) => void) => {
   const [formData, setFormData] = useState<Record<string, string | number>>({});
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [isReset, setIsReset] = useState(false);
@@ -39,6 +39,8 @@ const useForm = (data: FieldType[]) => {
     });
 
     if (isError) return;
+
+    onSubmit(formData);
   };
 
   return {
