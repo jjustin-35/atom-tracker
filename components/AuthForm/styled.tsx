@@ -2,6 +2,24 @@ import styled from '@emotion/styled';
 import { Button } from '@mui/material';
 import { theme } from '@/constants/styles';
 
+const btnColor = {
+  default: {
+    bgColor: '#ffffff',
+    color: '#000000',
+    hoverColor: '#ffffffB2',
+  },
+  google: {
+    bgColor: '#ffffff',
+    color: '#000000',
+    hoverColor: '#ffffffB2',
+  },
+  facebook: {
+    bgColor: '#1877f2',
+    color: '#ffffff',
+    hoverColor: '#1877f2B2',
+  },
+};
+
 export const FormCompWrapper = styled.div`
   display: flex;
   flex-direction: column;
@@ -51,7 +69,6 @@ export const Icon = styled.img`
 export const Image = styled.img`
   width: 18px;
   height: 18px;
-  margin-right: 24px;
 `;
 
 export const Hint = styled.div`
@@ -67,20 +84,21 @@ export const AuthButtonGroup = styled.div`
   margin-top: 12px;
 `;
 
-export const GoogleButton = styled(Button)`
-  background-color: white;
-  color: black;
-  justify-content: flex-start;
+export const AuthButton = styled(Button)<{ buttonType: 'google' | 'facebook' }>`
+  background-color: ${({ buttonType }) =>
+    btnColor[buttonType].bgColor || btnColor.default.bgColor};
+  color: ${({ buttonType }) =>
+    btnColor[buttonType].color || btnColor.default.color};
+  justify-content: center;
   :hover {
-    background-color: white;
+    background-color: ${({ buttonType }) =>
+      btnColor[buttonType].hoverColor || btnColor.default.hoverColor};
   }
 `;
 
-export const FacebookButton = styled(Button)`
-  background-color: #1877f2;
-  color: white;
+export const BtnContent = styled.span`
+  display: flex;
   justify-content: flex-start;
-  :hover {
-    background-color: #1877f2;
-  }
+  align-items: center;
+  gap: 24px;
 `;

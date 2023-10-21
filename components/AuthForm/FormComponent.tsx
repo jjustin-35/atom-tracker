@@ -9,8 +9,8 @@ import {
   Hint,
   Image,
   AuthButtonGroup,
-  GoogleButton,
-  FacebookButton,
+  AuthButton,
+  BtnContent,
 } from './styled';
 import { FormType } from './data';
 
@@ -52,20 +52,29 @@ const FormComponent = ({ data, variant }: Props) => {
           <>
             <Divider variant="middle" />
             <AuthButtonGroup>
-              <GoogleButton
+              <AuthButton
+                buttonType="google"
                 variant="contained"
                 onClick={() => signIn('google')}
               >
-                <Image src="/images/auth/google-icon.svg" alt="ic-google" />
-                Sign in with Google
-              </GoogleButton>
-              <FacebookButton
+                <BtnContent>
+                  <Image src="/images/auth/google-icon.svg" alt="ic-google" />
+                  Sign in with Google
+                </BtnContent>
+              </AuthButton>
+              <AuthButton
+                buttonType="facebook"
                 variant="contained"
                 onClick={() => signIn('facebook')}
               >
-                <Image src="/images/auth/facebook-icon.svg" alt="ic-facebook" />
-                Sign in with Facebook
-              </FacebookButton>
+                <BtnContent>
+                  <Image
+                    src="/images/auth/facebook-icon.svg"
+                    alt="ic-facebook"
+                  />
+                  Sign in with Facebook
+                </BtnContent>
+              </AuthButton>
             </AuthButtonGroup>
           </>
         )}
