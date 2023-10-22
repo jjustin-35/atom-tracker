@@ -46,8 +46,10 @@ const useForm = (
       });
 
       handleError(error);
-      if (!isEmptyObj(error)) isError = true;
+      if (error[field.name]) isError = true;
     });
+
+    console.log('isError', isError);
 
     if (isError) return;
 

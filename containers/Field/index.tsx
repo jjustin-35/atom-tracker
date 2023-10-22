@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import type { TextFieldType, SelectType } from '@/constants/types/global';
 
@@ -21,9 +21,11 @@ const Field = ({
   ...inputProps
 }: FieldProps) => {
   const errorMessage = errors[inputProps.name];
+  const [value, setValue] = useState<string | number>('');
 
   const changeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     handleFormData({ [inputProps.name]: e.target.value });
+    setValue(e.target.value);
   };
 
   const blurHandler = (e: React.FocusEvent<HTMLInputElement>) => {
@@ -44,6 +46,7 @@ const Field = ({
   const resetHandler = () => {
     handleFormData({ [inputProps.name]: '' });
     handleError({ [inputProps.name]: '' });
+    setValue('');
   };
 
   useEffect(() => {
@@ -68,6 +71,7 @@ const Field = ({
   return (
     <TextField
       type={type}
+      value={value}
       errorMessage={errorMessage}
       onChange={changeHandler}
       inputProps={{

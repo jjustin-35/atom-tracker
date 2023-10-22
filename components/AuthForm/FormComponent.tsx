@@ -1,5 +1,6 @@
 import { Button, Typography, Divider } from '@mui/material';
 import { signIn } from 'next-auth/react';
+import { useRouter } from 'next/navigation';
 
 import { UserType } from '@/constants/types/api';
 import { usePostSignUpMutation } from '@/redux/apis/auth';
@@ -23,8 +24,13 @@ type Props = {
 
 const FormComponent = ({ data, variant }: Props) => {
   const [postSignUp, result] = usePostSignUpMutation();
+  const router = useRouter();
 
   const isSubmitted = result.isSuccess;
+
+  if (isSubmitted) {
+    router.push('/auth/signin');
+  }
 
   const onSubmit = (data: UserType) => {
     if (variant === 'signup') return postSignUp(data);

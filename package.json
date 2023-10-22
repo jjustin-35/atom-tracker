@@ -8,14 +8,15 @@
     "start": "next start",
     "prestart": "yarn prisma:push",
     "lint": "next lint",
-    "prisma:push": "prisma db push"
+    "prisma:push": "prisma db push",
+    "prisma:generate": "prisma generate"
   },
   "dependencies": {
     "@emotion/react": "^11.11.1",
     "@emotion/styled": "^11.11.0",
     "@mui/icons-material": "^5.14.12",
     "@mui/material": "^5.14.11",
-    "@prisma/client": "^5.4.0",
+    "@prisma/client": "^5.4.2",
     "@reduxjs/toolkit": "^1.9.7",
     "bcrypt": "^5.1.1",
     "next": "13.5.4",

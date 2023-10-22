@@ -53,7 +53,7 @@ const data: DataType = {
       },
       {
         type: 'text',
-        name: 'username',
+        name: 'name',
         label: 'Username',
         placeholder: 'Username',
         required: true,
