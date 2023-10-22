@@ -2,6 +2,7 @@ import { Button, Typography, Divider } from '@mui/material';
 import { signIn } from 'next-auth/react';
 
 import { UserType } from '@/constants/types/api';
+import { usePostSignUpMutation } from '@/redux/apis/auth';
 import useForm from '@/helpers/useForm';
 import Link from '../Link';
 import Field from '@/containers/Field';
@@ -18,12 +19,19 @@ import { FormType } from './data';
 type Props = {
   data: FormType;
   variant: 'signin' | 'signup';
-  onSubmit: (data: UserType) => void;
-  isSubmitted?: boolean;
 };
 
-const FormComponent = ({ data, variant, isSubmitted, onSubmit }: Props) => {
-  const { errors, handleFormData, handleError, submitHandler } =
+const FormComponent = ({ data, variant }: Props) => {
+  const [postSignUp, result] = usePostSignUpMutation();
+
+  const isSubmitted = result.isSuccess;
+
+  const onSubmit = (data: UserType) => {
+    if (variant === 'signup') return postSignUp(data);
+    return signIn('credentials', { ...data, callbackUrl: '/' });
+  };
+
+  const { formData, errors, handleFormData, handleError, submitHandler } =
     useForm(data.fields, onSubmit, isSubmitted);
 
   return (
@@ -34,6 +42,9 @@ const FormComponent = ({ data, variant, isSubmitted, onSubmit }: Props) => {
             key={field.name}
             errors={errors}
             isReset={isSubmitted}
+            confirmData={
+              field.name === 'confirmPassword' && (formData.password as string)
+            }
             handleFormData={handleFormData}
             handleError={handleError}
             {...field}

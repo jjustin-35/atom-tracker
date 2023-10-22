@@ -25,6 +25,7 @@ type ErrorType = Record<string, string>;
 export type TextFieldType = {
   errors: ErrorType;
   isReset: boolean;
+  confirmData?: string;
   handleFormData: (data: Record<string, string | number>) => void;
   handleError: (data: Record<string, string>) => void;
 } & TextFieldProps;

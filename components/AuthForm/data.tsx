@@ -49,24 +49,28 @@ const data: DataType = {
         name: 'email',
         label: 'Email',
         placeholder: 'Email',
+        required: true,
       },
       {
         type: 'text',
         name: 'username',
         label: 'Username',
         placeholder: 'Username',
+        required: true,
       },
       {
         type: 'password',
         name: 'password',
         label: 'Password',
         placeholder: 'Password',
+        required: true,
       },
       {
         type: 'password',
         name: 'confirmPassword',
         label: 'Confirm Password',
         placeholder: 'Confirm Password',
+        required: true,
       },
     ],
     hint: [

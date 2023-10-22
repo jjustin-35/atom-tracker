@@ -15,6 +15,7 @@ const Field = ({
   type,
   errors,
   isReset,
+  confirmData,
   handleFormData,
   handleError,
   ...inputProps
@@ -31,6 +32,7 @@ const Field = ({
       fieldData,
       type,
       isRequired: inputProps.required,
+      confirmData: inputProps.name === 'confirmPassword' && confirmData,
     });
 
     handleError(error);

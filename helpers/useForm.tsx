@@ -41,6 +41,8 @@ const useForm = (
         fieldData,
         type: field.type,
         isRequired: field.required,
+        confirmData:
+          field.name === 'confirmPassword' && (formData.password as string),
       });
 
       handleError(error);
@@ -53,6 +55,7 @@ const useForm = (
   };
 
   return {
+    formData,
     errors,
     handleFormData,
     handleError,

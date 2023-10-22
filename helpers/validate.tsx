@@ -6,22 +6,31 @@ type ValidateType = {
   fieldData: Record<string, string | number>;
   type: string;
   isRequired: boolean;
+  confirmData?: string;
 };
 
-const validate = ({ fieldData, type, isRequired }: ValidateType) => {
+const validate = ({ fieldData, type, isRequired, confirmData }: ValidateType) => {
   const { name, value } = fieldData;
-  
-  if (!isRequired) return {[name]: ''};
+
+  if (!isRequired) return { [name]: '' };
   if (!value) {
-    return {[name]: 'Required'};
+    return { [name]: 'Required' };
   }
   if (type === 'email' && !emailRegex.test(value.toString())) {
-    return {[name]: 'Invalid email'};
+    return { [name]: 'Invalid email' };
+  }
+  if (name === 'confirmPassword' && value !== confirmData) {
+    console.log('password', confirmData);
+    console.log('value', value);
+    return { [name]: 'Password does not match' };
   }
   if (type === 'password' && !passwordRegex.test(value.toString())) {
-    return {[name]: 'Invalid password'};
+    return {
+      [name]:
+        'Invalid password, password must have at least eight characters, one uppercase letter and one lowercase letter',
+    };
   }
-  return {[name]: ''};
+  return { [name]: '' };
 };
 
 export default validate;
