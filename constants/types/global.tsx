@@ -33,3 +33,5 @@ export type SelectType = TextFieldType & {
   type: 'select';
   options: { value: string; label: string }[];
 };
+
+export type FormDataType = Record<string, string | number>;

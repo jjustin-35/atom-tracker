@@ -1,19 +1,28 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
-import { FieldType } from '@/constants/types/global';
+import { FieldType, FormDataType } from '@/constants/types/global';
 
 import validate from './validate';
 import { isEmptyObj } from './object';
 
-
-const useForm = (data: FieldType[], onSubmit?: (data: Record<string, string | number>) => void) => {
-  const [formData, setFormData] = useState<Record<string, string | number>>({});
+const useForm = (
+  data: FieldType[],
+  onSubmit: (data: FormDataType) => void,
+  isSubmitted: boolean,
+) => {
+  const [formData, setFormData] = useState<FormDataType>({});
   const [errors, setErrors] = useState<Record<string, string>>({});
-  const [isReset, setIsReset] = useState(false);
+
+  useEffect(() => {
+    if (isSubmitted) {
+      setFormData({});
+      setErrors({});
+    }
+  }, [isSubmitted]);
 
   const requiredFields = data.filter((field) => field.required);
 
-  const handleFormData = (data: Record<string, string | number>) => {
+  const handleFormData = (data: FormDataType) => {
     setFormData({ ...formData, ...data });
   };
 
@@ -45,7 +54,6 @@ const useForm = (data: FieldType[], onSubmit?: (data: Record<string, string | nu
 
   return {
     errors,
-    isReset,
     handleFormData,
     handleError,
     submitHandler,

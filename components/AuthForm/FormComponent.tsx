@@ -1,6 +1,7 @@
 import { Button, Typography, Divider } from '@mui/material';
 import { signIn } from 'next-auth/react';
 
+import { UserType } from '@/constants/types/api';
 import useForm from '@/helpers/useForm';
 import Link from '../Link';
 import Field from '@/containers/Field';
@@ -17,11 +18,13 @@ import { FormType } from './data';
 type Props = {
   data: FormType;
   variant: 'signin' | 'signup';
+  onSubmit: (data: UserType) => void;
+  isSubmitted?: boolean;
 };
 
-const FormComponent = ({ data, variant }: Props) => {
-  const { isReset, errors, handleFormData, handleError, submitHandler } =
-    useForm(data.fields);
+const FormComponent = ({ data, variant, isSubmitted, onSubmit }: Props) => {
+  const { errors, handleFormData, handleError, submitHandler } =
+    useForm(data.fields, onSubmit, isSubmitted);
 
   return (
     <form onSubmit={submitHandler}>
@@ -30,7 +33,7 @@ const FormComponent = ({ data, variant }: Props) => {
           <Field
             key={field.name}
             errors={errors}
-            isReset={isReset}
+            isReset={isSubmitted}
             handleFormData={handleFormData}
             handleError={handleError}
             {...field}
