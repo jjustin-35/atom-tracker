@@ -20,8 +20,6 @@ const validate = ({ fieldData, type, isRequired, confirmData }: ValidateType) =>
     return { [name]: 'Invalid email' };
   }
   if (name === 'confirmPassword' && value !== confirmData) {
-    console.log('password', confirmData);
-    console.log('value', value);
     return { [name]: 'Password does not match' };
   }
   if (type === 'password' && !passwordRegex.test(value.toString())) {
