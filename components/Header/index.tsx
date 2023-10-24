@@ -8,12 +8,14 @@ import { breakpointsValues } from '@/constants/styles';
 import NavBar from './NavBar';
 import Menu from './Menu';
 import dataset, { HeaderType } from './data';
+import { FeatureType } from '@/constants/types/features';
 
 type HeaderProps = {
   type?: HeaderType;
+  variant?: FeatureType;
 };
 
-const Header = ({ type = 'common' }: HeaderProps) => {
+const Header = ({ type = 'common', variant }: HeaderProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const { width: windowWidth } = useWindowSize();
   const data = dataset[type];
@@ -26,7 +28,13 @@ const Header = ({ type = 'common' }: HeaderProps) => {
   };
   return (
     <>
-      <NavBar toggleDrawer={toggleDrawer} data={data} isOpen={isOpen} isMobile={isMobile} />
+      <NavBar
+        toggleDrawer={toggleDrawer}
+        data={data}
+        isOpen={isOpen}
+        isMobile={isMobile}
+        variant={variant}
+      />
       {isMobile && (
         <SwipeableDrawer
           anchor="left"

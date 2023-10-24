@@ -1,9 +1,10 @@
 import { ImageType, ButtonType } from '@/constants/types/global';
+import { FeatureType } from '@/constants/types/features';
 
-export type HeaderType = 'common';
+export type HeaderType = 'common' | 'app';
 
-export type BrandType = {
-  logo: ImageType;
+export type TitleType = {
+  logo?: ImageType;
   text: string;
 };
 
@@ -22,16 +23,31 @@ export type MenuType = {
 };
 
 export type HeaderDataType = {
-  brand: BrandType;
+  title: TitleType;
   menu: MenuType[];
-  buttons: MenuButtonType[];
+  buttons?: MenuButtonType[];
 };
 
 type DataType = Record<HeaderType, HeaderDataType>;
 
+export const appNavTitle: Record<FeatureType, TitleType> = {
+  dashboard: {
+    text: '時間表',
+  },
+  analysis: {
+    text: '圖表分析',
+  },
+  schedule: {
+    text: '時程安排',
+  },
+  account: {
+    text: '帳號管理',
+  },
+};
+
 const data: DataType = {
   common: {
-    brand: {
+    title: {
       logo: {
         src: '/images/icon/ic-logo-white.svg',
         alt: 'ic-logo',
@@ -64,6 +80,38 @@ const data: DataType = {
         color: 'inherit',
         href: '/auth/signup',
         variant: 'outlined',
+      },
+    ],
+  },
+  app: {
+    title: {
+      text: '時間表',
+    },
+    menu: [
+      {
+        key: 'dashboard',
+        text: '時間表',
+        href: '/dashboard',
+      },
+      {
+        key: 'analysis',
+        text: '圖表分析',
+        href: '/analysis',
+      },
+      {
+        key: 'schedule',
+        text: '時程安排',
+        href: '/schedule',
+      },
+      {
+        key: 'account',
+        text: '帳號管理',
+        href: '/account',
+      },
+      {
+        key: 'logout',
+        text: '登出',
+        href: '/auth/signin',
       },
     ],
   },
