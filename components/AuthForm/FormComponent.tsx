@@ -34,7 +34,7 @@ const FormComponent = ({ data, variant }: Props) => {
 
   const onSubmit = (data: UserType) => {
     if (variant === 'signup') return postSignUp(data);
-    return signIn('credentials', { ...data, callbackUrl: '/' });
+    return signIn('credentials', { callbackUrl: '/dashboard' });
   };
 
   const { formData, errors, handleFormData, handleError, submitHandler } =
@@ -75,7 +75,7 @@ const FormComponent = ({ data, variant }: Props) => {
               <AuthButton
                 buttonType="google"
                 variant="contained"
-                onClick={() => signIn('google')}
+                onClick={() => signIn('google', { callbackUrl: '/dashboard' })}
               >
                 <BtnContent>
                   <Image src="/images/auth/google-icon.svg" alt="ic-google" />
@@ -85,7 +85,7 @@ const FormComponent = ({ data, variant }: Props) => {
               <AuthButton
                 buttonType="facebook"
                 variant="contained"
-                onClick={() => signIn('facebook')}
+                onClick={() => signIn('facebook', { callbackUrl: '/dashboard' })}
               >
                 <BtnContent>
                   <Image
