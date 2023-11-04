@@ -4,7 +4,6 @@ import GoogleProvider from 'next-auth/providers/google';
 import FacebookProvider from 'next-auth/providers/facebook';
 import prisma from '@/lib/prisma';
 import { compareHashPassword } from '@/helpers/password';
-import { Profile } from 'next-auth';
 
 export const authOptions: NextAuthOptions = {
   providers: [

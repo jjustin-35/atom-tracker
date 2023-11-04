@@ -1,8 +1,8 @@
 import { FieldType } from '@/constants/types/global';
-import { IconsType } from '@/components/Icon/data';
+import { TimeNodeVariantType } from '@/constants/types/timenode';
 
 type IconType = {
-  type: IconsType;
+  type: TimeNodeVariantType;
   title: string;
 };
 

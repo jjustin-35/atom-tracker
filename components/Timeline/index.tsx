@@ -1,20 +1,16 @@
 'use client';
 
 import { Timeline as TimelineWrapper } from '@mui/lab';
+import { TimeNodeType } from '@/constants/types/api';
 import Item from './Item';
 
-const Timeline = ({ data }) => {
+type Props = {
+  data: TimeNodeType[];
+};
+
+const Timeline = ({ data }: Props) => {
   return (
     <TimelineWrapper position="left">
-      {data.items?.map((item, idx) => (
-        <Item
-          key={idx}
-          time={item.time}
-          type={item.type}
-          content={item.content}
-          isNewItem={item.isNewItem}
-        />
-      ))}
     </TimelineWrapper>
   );
 };

@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { Typography, Divider } from '@mui/material';
 
 import { TimeNodeType } from '@/constants/types/api';
@@ -13,7 +14,7 @@ import { isEmptyObj } from '@/helpers/object';
 
 import Field from '@/containers/Field';
 import Icon from '@/components/Icon';
-import { Wrapper, InputWrapper, IconGroup } from './styled';
+import { Wrapper, InputWrapper, IconGroup, IconWrapper } from './styled';
 import data from './data';
 
 type Props = {
@@ -24,13 +25,24 @@ const EditTimelineItem = ({ timenodeId }: Props) => {
   const { data: timeNodeData, error } = useGetTimeNodeQuery(timenodeId);
   const [postTimeNode, postResult] = usePostTimeNodeMutation();
   const [putTimeNode, putResult] = usePutTimeNodeMutation();
+  const [selectedType, setSelectedType] = useState<TimeNodeVariantType>(
+    (timeNodeData.type as TimeNodeVariantType) || 'default',
+  );
   const isNewItem = !timenodeId;
   const isSuccess = isNewItem ? postResult.isSuccess : putResult.isSuccess;
   const isSubmit = isSuccess;
 
+  const selectTypeHandler = (type: TimeNodeVariantType) => {
+    setSelectedType(type);
+  };
+
   const onSubmit = (data: TimeNodeType) => {
-    if (!isNewItem) return putTimeNode({ ...data, id: timenodeId });
-    postTimeNode(data);
+    const submitData = {
+      ...data,
+      type: selectedType,
+    };
+    if (!isNewItem) return putTimeNode({ ...submitData, id: timenodeId });
+    postTimeNode(submitData);
   };
 
   const { errors, handleError, handleFormData, submitHandler } = useForm(
@@ -42,7 +54,6 @@ const EditTimelineItem = ({ timenodeId }: Props) => {
   if (!isNewItem && (isEmptyObj(timeNodeData) || error)) return null;
 
   const type = (timeNodeData?.type || 'default') as TimeNodeVariantType;
-
 
   return (
     <>
@@ -66,7 +77,9 @@ const EditTimelineItem = ({ timenodeId }: Props) => {
         <Divider />
         <IconGroup>
           {data.icons?.map((icon, idx) => (
-            <Icon key={idx} type={icon.type} />
+            <IconWrapper key={idx} onClick={() => selectTypeHandler(icon.type)}>
+              <Icon type={icon.type} />
+            </IconWrapper>
           ))}
         </IconGroup>
       </Wrapper>
