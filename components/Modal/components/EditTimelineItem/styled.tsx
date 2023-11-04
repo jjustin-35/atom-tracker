@@ -15,6 +15,7 @@ export const IconGroup = styled.div`
   display: flex;
   justify-content: space-evenly;
   flex-wrap: wrap;
+  overflow-y: scroll;
 `;
 
 export const IconWrapper = styled.div`
