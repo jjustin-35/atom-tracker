@@ -1,6 +1,7 @@
-import IconsData, { IconsType } from './data';
+import { TimeNodeVariantType } from '@/constants/types/timenode';
+import IconsData from './data';
 
-const Icon = ({ type }: { type: IconsType }) => {
+const Icon = ({ type }: { type: TimeNodeVariantType }) => {
   const Icon = IconsData[type];
   if (!Icon) return null;
   return <Icon />;

@@ -57,7 +57,7 @@ const FormComponent = ({ data, variant }: Props) => {
           />
         ))}
         <Button type="submit" variant="contained" color="primary">
-          Submit
+          提交
         </Button>
         <Hint>
           {data.hint?.map((hint, idx) => (
@@ -79,20 +79,22 @@ const FormComponent = ({ data, variant }: Props) => {
               >
                 <BtnContent>
                   <Image src="/images/auth/google-icon.svg" alt="ic-google" />
-                  Sign in with Google
+                  Google 登入
                 </BtnContent>
               </AuthButton>
               <AuthButton
                 buttonType="facebook"
                 variant="contained"
-                onClick={() => signIn('facebook', { callbackUrl: '/dashboard' })}
+                onClick={() =>
+                  signIn('facebook', { callbackUrl: '/dashboard' })
+                }
               >
                 <BtnContent>
                   <Image
                     src="/images/auth/facebook-icon.svg"
                     alt="ic-facebook"
                   />
-                  Sign in with Facebook
+                  Facebook 登入
                 </BtnContent>
               </AuthButton>
             </AuthButtonGroup>

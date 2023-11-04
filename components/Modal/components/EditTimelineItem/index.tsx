@@ -1,21 +1,35 @@
 import { Typography, Divider } from '@mui/material';
 
 import { TimeNodeType } from '@/constants/types/api';
+import { TimeNodeVariantType } from '@/constants/types/timenode';
+
 import useForm from '@/helpers/useForm';
-import { usePostTimeNodeMutation } from '@/redux/apis/timeline';
+import {
+  useGetTimeNodeQuery,
+  usePostTimeNodeMutation,
+  usePutTimeNodeMutation,
+} from '@/redux/apis/timeline';
+import { isEmptyObj } from '@/helpers/object';
 
 import Field from '@/containers/Field';
 import Icon from '@/components/Icon';
-import { Wrapper, InputWrapper, IconGroup, IconWrapper } from './styled';
+import { Wrapper, InputWrapper, IconGroup } from './styled';
 import data from './data';
 
-const EditTimelineItem = () => {
-  const [postTimeNode, result] = usePostTimeNodeMutation();
-  const { isSuccess, isError } = result;
-  const isSubmit = isSuccess || !isError;
-  const type = 'work';
+type Props = {
+  timenodeId?: string;
+};
+
+const EditTimelineItem = ({ timenodeId }: Props) => {
+  const { data: timeNodeData, error } = useGetTimeNodeQuery(timenodeId);
+  const [postTimeNode, postResult] = usePostTimeNodeMutation();
+  const [putTimeNode, putResult] = usePutTimeNodeMutation();
+  const isNewItem = !timenodeId;
+  const isSuccess = isNewItem ? postResult.isSuccess : putResult.isSuccess;
+  const isSubmit = isSuccess;
 
   const onSubmit = (data: TimeNodeType) => {
+    if (!isNewItem) return putTimeNode({ ...data, id: timenodeId });
     postTimeNode(data);
   };
 
@@ -24,6 +38,11 @@ const EditTimelineItem = () => {
     onSubmit,
     isSubmit,
   );
+
+  if (!isNewItem && (isEmptyObj(timeNodeData) || error)) return null;
+
+  const type = (timeNodeData?.type || 'default') as TimeNodeVariantType;
+
 
   return (
     <>

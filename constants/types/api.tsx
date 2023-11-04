@@ -1,10 +1,5 @@
-import { TimeNode } from '@prisma/client';
+import { User, TimeNode } from '@prisma/client';
 
-export type UserType = {
-  email: string;
-  password: string;
-  name: string;
-  avatar: string;
-};
+export type UserType = Partial<User>;
 
 export type TimeNodeType = Partial<TimeNode>;

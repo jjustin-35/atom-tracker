@@ -7,6 +7,9 @@ const timelineApi = createApi({
     baseUrl: '/api/timeline',
   }),
   endpoints: (builder) => ({
+    getTimeNode: builder.query<TimeNodeType, string>({
+      query: (id) => id && `/?id=${id}`,
+    }),
     postTimeNode: builder.mutation<void, TimeNodeType>({
       query: (data) => ({
         url: '/',
@@ -14,9 +17,20 @@ const timelineApi = createApi({
         body: data,
       }),
     }),
+    putTimeNode: builder.mutation<void, TimeNodeType>({
+      query: (data) => ({
+        url: '/',
+        method: 'PUT',
+        body: data,
+      }),
+    }),
   }),
 });
 
-export const { usePostTimeNodeMutation } = timelineApi;
+export const {
+  useGetTimeNodeQuery,
+  usePostTimeNodeMutation,
+  usePutTimeNodeMutation,
+} = timelineApi;
 
 export default timelineApi;

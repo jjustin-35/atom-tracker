@@ -1,19 +1,19 @@
 import React, { FC } from 'react';
+import { ModalTypes } from '../../../constants/types/modal';
 import EditTimelineItem from './EditTimelineItem';
-
-export type ModalTypes = 'edit_timeline_item';
 
 type Props = {
   type: ModalTypes;
+  modalProps?: Record<string, any>;
 };
 
 const components: Record<string, FC> = {
   edit_timeline_item: EditTimelineItem,
 };
 
-const ModalComponent = ({ type }: Props) => {
+const ModalComponent = ({ type, modalProps }: Props) => {
   const Component = components[type];
-  return <Component />;
+  return <Component {...modalProps} />;
 };
 
 export default ModalComponent;
