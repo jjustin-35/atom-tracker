@@ -4,6 +4,7 @@ import GoogleProvider from 'next-auth/providers/google';
 import FacebookProvider from 'next-auth/providers/facebook';
 import prisma from '@/lib/prisma';
 import { compareHashPassword } from '@/helpers/password';
+import { Profile } from 'next-auth';
 
 export const authOptions: NextAuthOptions = {
   providers: [
@@ -31,7 +32,7 @@ export const authOptions: NextAuthOptions = {
           return null;
         }
 
-        return user; 
+        return user;
       },
     }),
     GoogleProvider({
@@ -45,6 +46,33 @@ export const authOptions: NextAuthOptions = {
   ],
   pages: {
     signIn: '/auth/signin',
+  },
+  callbacks: {
+    signIn: async ({ user, account, profile }) => {
+      if (account.provider !== 'credentials') {
+        try {
+          const { email, name } = profile;
+          const { image: avatar } = user;
+          const existUser = await prisma.user.findUnique({ where: { email } });
+          if (existUser) return true;
+
+          await prisma.user.create({
+            data: {
+              email,
+              name,
+              password: '',
+              avatar,
+            },
+          });
+
+          return true;
+        } catch (err) {
+          console.log(err);
+          return false;
+        }
+      }
+      return true;
+    },
   },
 };
 

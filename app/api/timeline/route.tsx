@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import prisma from '@/lib/prisma';
 import { TimeNode } from '@prisma/client';
-import { getTimeNode } from '@/helpers/apis';
+import { getTimeNode } from '@/apis/timeline';
 
 export const GET = async (req: NextRequest) => {
   try {

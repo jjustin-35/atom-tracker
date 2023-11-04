@@ -3,7 +3,6 @@ import { useEffect, useState } from 'react';
 import { FieldType, FormDataType } from '@/constants/types/global';
 
 import validate from './validate';
-import { isEmptyObj } from './object';
 
 const useForm = (
   data: FieldType[],

@@ -1,6 +1,5 @@
 'use client';
 
-import { useState } from 'react';
 import { Modal as MuiModal } from '@mui/material';
 
 import { ModalTypes } from '@/constants/types/modal';

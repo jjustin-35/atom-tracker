@@ -10,6 +10,12 @@ export const breakpointsValues = {
   xl: 1920,
 };
 
+export const colors = {
+  white: '#ffffff',
+  black: '#000000',
+  grey: '#afafaf',
+};
+
 export const theme = createTheme({
   palette: {
     primary: {

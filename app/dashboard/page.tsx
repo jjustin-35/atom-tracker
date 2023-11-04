@@ -1,5 +1,11 @@
+import Modal from '@/containers/Modal';
+
 const Dashboard = () => {
-  return <></>;
+  return (
+    <>
+      <Modal />
+    </>
+  );
 };
 
 export default Dashboard;
