@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Typography, Divider, Button } from '@mui/material';
+import { useSession } from 'next-auth/react';
 import { useDispatch } from 'react-redux';
 
 import { TimeNodeType } from '@/constants/types/api';
@@ -11,6 +12,7 @@ import {
   usePostTimeNodeMutation,
   usePutTimeNodeMutation,
 } from '@/redux/apis/timeline';
+import { useGetUserQuery } from '@/redux/apis/auth';
 import { isEmptyObj } from '@/helpers/object';
 import { closeModal as closeModalAction } from '@/redux/slices/modal';
 
@@ -34,6 +36,11 @@ const EditTimeNode = ({ timenodeId, time }: EditTimelineItemProps) => {
   const { data: timeNodeData, error } = useGetTimeNodeQuery(timenodeId);
   const [postTimeNode, postResult] = usePostTimeNodeMutation();
   const [putTimeNode, putResult] = usePutTimeNodeMutation();
+
+  const { data: sessionData } = useSession();
+  const { data: queryData } = useGetUserQuery(sessionData?.user?.email);
+  const userData = queryData?.data;
+
   const [selectedType, setSelectedType] = useState<TimeNodeVariantType>(
     (timeNodeData?.type as TimeNodeVariantType) || 'default',
   );
@@ -52,11 +59,16 @@ const EditTimeNode = ({ timenodeId, time }: EditTimelineItemProps) => {
       const submitData = { ...timeNodeData, ...data, type: selectedType };
       putTimeNode({ ...submitData, id: timenodeId });
     } else {
-      const submitData = { ...data, type: selectedType, time, date: today };
+      const submitData = {
+        ...data,
+        type: selectedType,
+        time,
+        date: today,
+        userId: userData?.id,
+      };
       postTimeNode(submitData);
     }
-
-    if (isSuccess) closeModal();
+    closeModal();
   };
 
   const { errors, handleError, handleFormData, submitHandler } = useForm(
