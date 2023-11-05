@@ -12,6 +12,7 @@ const TimelineContainer = async () => {
 
     const today = new Date();
     const data = await getTimeline(user.id, today);
+    console.log(data);
 
     return <Timeline data={data} />;
   } catch (err) {
