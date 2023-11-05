@@ -36,7 +36,7 @@ model TimeNode {
     createdAt  DateTime  @default(now())
     updatedAt  DateTime  @updatedAt
     date       DateTime
-    time       DateTime
+    time       Int
     title      String
     note       String?
     type       String

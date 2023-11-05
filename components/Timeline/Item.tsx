@@ -7,31 +7,35 @@ import {
   TimelineContent,
 } from '@mui/lab';
 import { TimeNodeVariantType } from '@/constants/types/timenode';
-import { TimeHandler } from '@/helpers/time';
 import Icon from '../Icon';
 import Node from './Node';
 
 type Props = {
-  time: Date;
+  time: number;
+  timenodeId?: string;
   type: TimeNodeVariantType;
-  content: string;
+  title: string;
   isNewItem: boolean;
+  itemClickHandler?: (timenodeId?: string) => void;
 };
 
-const Item = ({ time, type, content, isNewItem }: Props) => {
+const Item = ({ time, timenodeId, type, title, isNewItem, itemClickHandler }: Props) => {
   const iconType = isNewItem && !type ? 'default' : type;
-  const formatedTime = TimeHandler(time);
+  const formattedTime = time < 10 ? `0${time}:00` : `${time}:00`;
   return (
     <TimelineItem>
-      <TimelineOppositeContent>{formatedTime}</TimelineOppositeContent>
+      <TimelineOppositeContent>{formattedTime}</TimelineOppositeContent>
       <TimelineSeparator>
         <TimelineDot>
           <Icon type={iconType} />
         </TimelineDot>
         <TimelineConnector />
       </TimelineSeparator>
-      <TimelineContent>
-        <Node isNewItem={isNewItem} content={content} />
+      <TimelineContent onClick={() => itemClickHandler(timenodeId)}>
+        <Node
+          isNewItem={isNewItem}
+          title={title}
+        />
       </TimelineContent>
     </TimelineItem>
   );

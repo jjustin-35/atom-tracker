@@ -3,7 +3,7 @@ import { ModalTypes } from '@/constants/types/modal';
 
 export type ModalStateType = {
   modalType?: ModalTypes;
-  modalProps: Record<string, any>;
+  modalProps?: Record<string, any>;
 };
 
 const initialState: ModalStateType = {
@@ -17,7 +17,7 @@ export const modalSlice = createSlice({
   reducers: {
     openModal: (state, action: PayloadAction<ModalStateType>) => {
       state.modalType = action.payload.modalType;
-      state.modalProps = action.payload.modalProps;
+      state.modalProps = action.payload.modalProps || {};
     },
     closeModal: (state) => {
       state.modalType = null;

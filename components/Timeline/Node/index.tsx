@@ -2,11 +2,11 @@ import { Wrapper } from './styled';
 
 type Props = {
   isNewItem: boolean;
-  content: string;
+  title: string;
 };
 
-const Node = ({ isNewItem, content }: Props) => {
-  return <Wrapper isNewItem={isNewItem}>{content}</Wrapper>;
+const Node = ({ isNewItem, title }: Props) => {
+  return <Wrapper isNewItem={isNewItem}>{title}</Wrapper>;
 };
 
 export default Node;

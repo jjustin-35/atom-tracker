@@ -11,4 +11,5 @@ export const Wrapper = styled.div<{ isNewItem: boolean }>`
   border-width: 1px;
   border-style: ${({ isNewItem }) => (isNewItem ? 'dashed' : 'solid')};
   border-color: ${({ isNewItem }) => (isNewItem ? colors.grey : colors.black)};
+  color: ${({ isNewItem }) => (isNewItem ? colors.grey : colors.black)};
 `;
