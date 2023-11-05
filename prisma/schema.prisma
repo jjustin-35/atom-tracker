@@ -35,7 +35,7 @@ model TimeNode {
     id         String    @id @default(auto()) @map("_id") @db.ObjectId
     createdAt  DateTime  @default(now())
     updatedAt  DateTime  @updatedAt
-    date       DateTime
+    date       String
     time       Int
     title      String
     note       String?

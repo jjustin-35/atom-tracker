@@ -27,7 +27,7 @@ const Timeline = ({ data }: Props) => {
   const currentHour = date.getHours();
   const hours = Array.from({ length: currentHour + 1 }, (_, i) => i);
   const items = hours.map((hour) => {
-    const item = data.find((item) => item.time === hour);
+    const item = data?.find((item) => item.time === hour);
     if (item) {
       return { ...item, isNewItem: false };
     }

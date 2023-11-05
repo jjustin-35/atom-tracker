@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Typography, Divider, Button } from '@mui/material';
 import { useSession } from 'next-auth/react';
 import { useDispatch } from 'react-redux';
+import dayjs from 'dayjs';
 
 import { TimeNodeType } from '@/constants/types/api';
 import { TimeNodeVariantType } from '@/constants/types/timenode';
@@ -13,6 +14,7 @@ import {
   usePutTimeNodeMutation,
 } from '@/redux/apis/timeline';
 import { useGetUserQuery } from '@/redux/apis/auth';
+import { DATE_FORMAT } from '@/constants/timeFormat';
 import { isEmptyObj } from '@/helpers/object';
 import { closeModal as closeModalAction } from '@/redux/slices/modal';
 
@@ -46,7 +48,7 @@ const EditTimeNode = ({ timenodeId, time }: EditTimelineItemProps) => {
   );
   const dispatch = useDispatch();
   const closeModal = () => dispatch(closeModalAction());
-  const today = new Date();
+  const today = dayjs().format(DATE_FORMAT);
   const isNewItem = !timenodeId;
   const isSuccess = isNewItem ? postResult.isSuccess : putResult.isSuccess;
 
