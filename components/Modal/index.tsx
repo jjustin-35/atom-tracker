@@ -3,11 +3,12 @@
 import { Modal as MuiModal } from '@mui/material';
 
 import { ModalTypes } from '@/constants/types/modal';
+
 import ModalComponent from './components';
-import { Outer, Wrapper } from './styled';
+import { Outer, Wrapper, Inner } from './styled';
 
 type Props = {
-  type: ModalTypes;
+  type?: ModalTypes;
   modalProps?: Record<string, any>;
   closeHandler: () => void;
 };
@@ -18,7 +19,9 @@ const Modal = ({ type, modalProps, closeHandler }: Props) => {
     <MuiModal open={isOpen} onClose={closeHandler}>
       <Outer>
         <Wrapper>
-          <ModalComponent type={type} modalProps={modalProps} />
+          <Inner>
+            <ModalComponent type={type} modalProps={modalProps} />
+          </Inner>
         </Wrapper>
       </Outer>
     </MuiModal>

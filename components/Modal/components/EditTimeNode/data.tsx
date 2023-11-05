@@ -1,4 +1,4 @@
-import { FieldType } from '@/constants/types/global';
+import { FieldType, ButtonType } from '@/constants/types/global';
 import { TimeNodeVariantType } from '@/constants/types/timenode';
 
 type IconType = {
@@ -10,13 +10,14 @@ type DataType = {
   title: string;
   fields: FieldType[];
   icons: IconType[];
+  button: ButtonType;
 };
 
 const data: DataType = {
   title: '編輯紀錄',
   fields: [
     {
-      name: 'timenode-item',
+      name: 'title',
       placeholder: '請輸入要記錄的事項',
       required: true,
       type: 'text',
@@ -48,6 +49,9 @@ const data: DataType = {
       title: '其他',
     },
   ],
+  button: {
+    text: '儲存',
+  }
 };
 
 export default data;

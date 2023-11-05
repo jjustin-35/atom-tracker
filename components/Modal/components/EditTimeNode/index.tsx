@@ -1,5 +1,6 @@
 import { useState } from 'react';
-import { Typography, Divider } from '@mui/material';
+import { Typography, Divider, Button } from '@mui/material';
+import { useDispatch } from 'react-redux';
 
 import { TimeNodeType } from '@/constants/types/api';
 import { TimeNodeVariantType } from '@/constants/types/timenode';
@@ -11,80 +12,101 @@ import {
   usePutTimeNodeMutation,
 } from '@/redux/apis/timeline';
 import { isEmptyObj } from '@/helpers/object';
+import { closeModal as closeModalAction } from '@/redux/slices/modal';
 
 import Field from '@/containers/Field';
 import Icon from '@/components/Icon';
-import { Wrapper, InputWrapper, IconGroup, IconWrapper } from './styled';
+import {
+  Wrapper,
+  InputWrapper,
+  IconGroup,
+  IconOuter,
+  IconWrapper,
+} from './styled';
 import data from './data';
 
-type Props = {
+type EditTimelineItemProps = {
   timenodeId?: string;
+  time: number;
 };
 
-const EditTimelineItem = ({ timenodeId }: Props) => {
+const EditTimeNode = ({ timenodeId, time }: EditTimelineItemProps) => {
   const { data: timeNodeData, error } = useGetTimeNodeQuery(timenodeId);
   const [postTimeNode, postResult] = usePostTimeNodeMutation();
   const [putTimeNode, putResult] = usePutTimeNodeMutation();
   const [selectedType, setSelectedType] = useState<TimeNodeVariantType>(
-    (timeNodeData.type as TimeNodeVariantType) || 'default',
+    (timeNodeData?.type as TimeNodeVariantType) || 'default',
   );
+  const dispatch = useDispatch();
+  const closeModal = () => dispatch(closeModalAction());
+  const today = new Date();
   const isNewItem = !timenodeId;
   const isSuccess = isNewItem ? postResult.isSuccess : putResult.isSuccess;
-  const isSubmit = isSuccess;
 
   const selectTypeHandler = (type: TimeNodeVariantType) => {
     setSelectedType(type);
   };
 
   const onSubmit = (data: TimeNodeType) => {
-    const submitData = {
-      ...data,
-      type: selectedType,
-    };
-    if (!isNewItem) return putTimeNode({ ...submitData, id: timenodeId });
-    postTimeNode(submitData);
+    if (!isNewItem) {
+      const submitData = { ...timeNodeData, ...data, type: selectedType };
+      putTimeNode({ ...submitData, id: timenodeId });
+    } else {
+      const submitData = { ...data, type: selectedType, time, date: today };
+      postTimeNode(submitData);
+    }
+
+    if (isSuccess) closeModal();
   };
 
   const { errors, handleError, handleFormData, submitHandler } = useForm(
     data.fields,
     onSubmit,
-    isSubmit,
+    isSuccess,
   );
 
   if (!isNewItem && (isEmptyObj(timeNodeData) || error)) return null;
 
-  const type = (timeNodeData?.type || 'default') as TimeNodeVariantType;
-
   return (
     <>
-      <Typography variant="h6" align="center" marginBottom={20}>
+      <Typography variant="h6" align="center" marginBottom={2}>
         {data.title}
       </Typography>
       <Wrapper onSubmit={submitHandler}>
         <InputWrapper>
-          <Icon type={type} />
+          <IconWrapper>
+            <Icon type={selectedType} />
+          </IconWrapper>
           {data.fields?.map((field, idx) => (
             <Field
               key={idx}
               errors={errors}
-              isReset={isSubmit}
+              isReset={isSuccess}
               handleError={handleError}
               handleFormData={handleFormData}
               {...field}
             />
           ))}
         </InputWrapper>
-        <Divider />
+        <Divider sx={{ width: '100%' }} />
         <IconGroup>
           {data.icons?.map((icon, idx) => (
-            <IconWrapper key={idx} onClick={() => selectTypeHandler(icon.type)}>
-              <Icon type={icon.type} />
-            </IconWrapper>
+            <IconOuter key={idx}>
+              <IconWrapper onClick={() => selectTypeHandler(icon.type)}>
+                <Icon type={icon.type} />
+              </IconWrapper>
+              <Typography variant="body2" align="center">
+                {icon.title}
+              </Typography>
+            </IconOuter>
           ))}
         </IconGroup>
+        <Button variant="contained" type="submit" sx={{ marginTop: '16px' }}>
+          {data.button.text}
+        </Button>
       </Wrapper>
     </>
   );
 };
 
-export default EditTimelineItem;
+export default EditTimeNode;

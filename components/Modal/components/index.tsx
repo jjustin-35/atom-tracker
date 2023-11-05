@@ -1,14 +1,15 @@
 import React, { FC } from 'react';
 import { ModalTypes } from '../../../constants/types/modal';
-import EditTimelineItem from './EditTimelineItem';
+import { EDIT_TIMNODE } from '@/constants/modalType';
+import EditTimeNode from './EditTimeNode';
 
 type Props = {
   type: ModalTypes;
   modalProps?: Record<string, any>;
 };
 
-const components: Record<string, FC> = {
-  edit_timeline_item: EditTimelineItem,
+const components: Record<ModalTypes, FC> = {
+  [EDIT_TIMNODE]: EditTimeNode,
 };
 
 const ModalComponent = ({ type, modalProps }: Props) => {

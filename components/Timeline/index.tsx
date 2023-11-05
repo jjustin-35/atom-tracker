@@ -16,10 +16,10 @@ const Timeline = ({ data }: Props) => {
   const dispatch = useDispatch();
   const openModal = (data: ModalStateType) => dispatch(openModalAction(data));
 
-  const itemClickHandler = (timenodeId?: TimeNodeType['id']) => {
+  const itemClickHandler = ( time: number, timenodeId?: TimeNodeType['id']) => {
     openModal({
       modalType: EDIT_TIMNODE,
-      modalProps: { timenodeId },
+      modalProps: { timenodeId, time },
     });
   };
 
@@ -40,12 +40,12 @@ const Timeline = ({ data }: Props) => {
   });
 
   return (
-    <TimelineWrapper position="left">
-      {items.map((item) => (
+    <TimelineWrapper position="right">
+      {items.map((item, idx) => (
         <Item
-          key={item.id}
+          key={idx}
           time={item.time}
-          timenodeId={item.id}
+          timenodeId={item.id || null}
           type={item.type as TimeNodeVariantType}
           title={item.title}
           isNewItem={item.isNewItem}
