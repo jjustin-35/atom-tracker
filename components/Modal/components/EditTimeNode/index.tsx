@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useRouter } from 'next/navigation';
 import { Typography, Divider, Button } from '@mui/material';
 import { useSession } from 'next-auth/react';
 import { useDispatch } from 'react-redux';
@@ -35,13 +36,15 @@ type EditTimelineItemProps = {
 };
 
 const EditTimeNode = ({ timenodeId, time }: EditTimelineItemProps) => {
-  const { data: timeNodeData, error } = useGetTimeNodeQuery(timenodeId);
+  const router = useRouter();
+  const { data: timeNodeResp, error } = useGetTimeNodeQuery(timenodeId);
   const [postTimeNode, postResult] = usePostTimeNodeMutation();
   const [putTimeNode, putResult] = usePutTimeNodeMutation();
 
   const { data: sessionData } = useSession();
   const { data: queryData } = useGetUserQuery(sessionData?.user?.email);
   const userData = queryData?.data;
+  const timeNodeData = timeNodeResp?.data;
 
   const [selectedType, setSelectedType] = useState<TimeNodeVariantType>(
     (timeNodeData?.type as TimeNodeVariantType) || 'default',
@@ -71,6 +74,11 @@ const EditTimeNode = ({ timenodeId, time }: EditTimelineItemProps) => {
       postTimeNode(submitData);
     }
     closeModal();
+
+    // asynchronous refresh timeline
+    setTimeout(() => {
+      router.refresh();
+    }, 100);
   };
 
   const { errors, handleError, handleFormData, submitHandler } = useForm(
@@ -94,6 +102,7 @@ const EditTimeNode = ({ timenodeId, time }: EditTimelineItemProps) => {
           {data.fields?.map((field, idx) => (
             <Field
               key={idx}
+              value={timeNodeData?.[field.name] || ''}
               errors={errors}
               isReset={isSuccess}
               handleError={handleError}

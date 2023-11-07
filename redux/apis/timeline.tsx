@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/dist/query/react';
-import { TimeNodeType } from '../../constants/types/api';
+import { ApiResponse, TimeNodeType } from '../../constants/types/api';
 
 const timelineApi = createApi({
   reducerPath: 'timelineApi',
@@ -7,7 +7,7 @@ const timelineApi = createApi({
     baseUrl: '/api/timeline',
   }),
   endpoints: (builder) => ({
-    getTimeNode: builder.query<TimeNodeType, string>({
+    getTimeNode: builder.query<ApiResponse<TimeNodeType>, string | null>({
       query: (id) => id && `/?id=${id}`,
     }),
     postTimeNode: builder.mutation<void, TimeNodeType>({

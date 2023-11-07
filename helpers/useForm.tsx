@@ -48,8 +48,6 @@ const useForm = (
       if (error[field.name]) isError = true;
     });
 
-    console.log('isError', isError);
-
     if (isError) return;
 
     onSubmit(formData);

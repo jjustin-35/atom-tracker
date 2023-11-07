@@ -13,6 +13,7 @@ type FieldProps = TextFieldType | SelectType;
 
 const Field = ({
   type,
+  value,
   errors,
   isReset,
   confirmData,
@@ -21,7 +22,9 @@ const Field = ({
   ...inputProps
 }: FieldProps) => {
   const errorMessage = errors[inputProps.name];
-  const [value, setValue] = useState<string | number>('');
+  const [fieldValue, setValue] = useState<string | number>(
+    (value as string | number) || '',
+  );
 
   const changeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     handleFormData({ [inputProps.name]: e.target.value });
@@ -71,7 +74,7 @@ const Field = ({
   return (
     <TextField
       type={type}
-      value={value}
+      value={fieldValue}
       errorMessage={errorMessage}
       onChange={changeHandler}
       inputProps={{
