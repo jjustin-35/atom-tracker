@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { Typography, Divider, Button } from '@mui/material';
 import { useSession } from 'next-auth/react';
@@ -46,14 +46,17 @@ const EditTimeNode = ({ timenodeId, time }: EditTimelineItemProps) => {
   const userData = queryData?.data;
   const timeNodeData = timeNodeResp?.data;
 
-  const [selectedType, setSelectedType] = useState<TimeNodeVariantType>(
-    (timeNodeData?.type as TimeNodeVariantType) || 'default',
-  );
+  const [selectedType, setSelectedType] =
+    useState<TimeNodeVariantType>('default');
   const dispatch = useDispatch();
   const closeModal = () => dispatch(closeModalAction());
   const today = dayjs().format(DATE_FORMAT);
   const isNewItem = !timenodeId;
   const isSuccess = isNewItem ? postResult.isSuccess : putResult.isSuccess;
+
+  useEffect(() => {
+    setSelectedType((timeNodeData?.type as TimeNodeVariantType) || 'default');
+  }, [timeNodeData]);
 
   const selectTypeHandler = (type: TimeNodeVariantType) => {
     setSelectedType(type);

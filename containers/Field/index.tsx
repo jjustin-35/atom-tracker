@@ -36,8 +36,13 @@ const Field = ({
     }
   }, [value]);
 
+  useEffect(() => {
+    if (fieldValue) {
+      handleFormData({ [inputProps.name]: fieldValue });
+    }
+  }, [fieldValue]);
+
   const changeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-    handleFormData({ [inputProps.name]: e.target.value });
     setValue(e.target.value);
   };
 
