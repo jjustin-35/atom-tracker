@@ -78,7 +78,7 @@ const EditTimeNode = ({ timenodeId, time }: EditTimelineItemProps) => {
     // asynchronous refresh timeline
     setTimeout(() => {
       router.refresh();
-    }, 100);
+    }, 500);
   };
 
   const { errors, handleError, handleFormData, submitHandler } = useForm(

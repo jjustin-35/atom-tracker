@@ -23,6 +23,7 @@ export type FieldType = TextFieldProps & {
 type ErrorType = Record<string, string>;
 
 export type TextFieldType = {
+  value: string | number;
   errors: ErrorType;
   isReset: boolean;
   confirmData?: string;

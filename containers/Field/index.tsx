@@ -22,9 +22,19 @@ const Field = ({
   ...inputProps
 }: FieldProps) => {
   const errorMessage = errors[inputProps.name];
-  const [fieldValue, setValue] = useState<string | number>(
-    (value as string | number) || '',
-  );
+  const [fieldValue, setValue] = useState<string | number>(value || '');
+
+  useEffect(() => {
+    if (isReset) {
+      resetHandler();
+    }
+  }, [isReset]);
+
+  useEffect(() => {
+    if (value) {
+      setValue(value);
+    }
+  }, [value]);
 
   const changeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     handleFormData({ [inputProps.name]: e.target.value });
@@ -51,12 +61,6 @@ const Field = ({
     handleError({ [inputProps.name]: '' });
     setValue('');
   };
-
-  useEffect(() => {
-    if (isReset) {
-      resetHandler();
-    }
-  }, [isReset]);
 
   if (type === 'select') {
     return (

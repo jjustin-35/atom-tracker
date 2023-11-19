@@ -3,7 +3,7 @@ import Timeline from '@/containers/Timeline';
 
 export const revalidate = 60 * 60;
 
-const Dashboard = () => {
+const Dashboard = async () => {
   return (
     <>
       <Modal />
