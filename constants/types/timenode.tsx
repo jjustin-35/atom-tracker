@@ -5,4 +5,5 @@ export type TimeNodeVariantType =
   | 'game'
   | 'sports'
   | 'life'
-  | 'others';
+  | 'others'
+  | 'add';

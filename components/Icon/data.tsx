@@ -1,4 +1,3 @@
-import { FC } from 'react';
 import { TimeNodeVariantType } from '@/constants/types/timenode';
 
 import QuestionMarkIcon from '@mui/icons-material/QuestionMark';
@@ -8,8 +7,11 @@ import SportsEsportsIcon from '@mui/icons-material/SportsEsports';
 import FitnessCenterIcon from '@mui/icons-material/FitnessCenter';
 import HomeIcon from '@mui/icons-material/Home';
 import CategoryIcon from '@mui/icons-material/Category';
+import AddIcon from '@mui/icons-material/Add';
 
-const IconsData: Record<TimeNodeVariantType, FC> = {
+type IconComponentType = typeof QuestionMarkIcon;
+
+const IconsData: Record<TimeNodeVariantType, IconComponentType> = {
   default: QuestionMarkIcon,
   food: RestaurantIcon,
   work: WorkIcon,
@@ -17,6 +19,7 @@ const IconsData: Record<TimeNodeVariantType, FC> = {
   sports: FitnessCenterIcon,
   life: HomeIcon,
   others: CategoryIcon,
+  add: AddIcon,
 };
 
 export default IconsData;

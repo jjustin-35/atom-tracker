@@ -17,7 +17,7 @@ type Props = {
   type: TimeNodeVariantType;
   title: string;
   isNewItem: boolean;
-  itemClickHandler?: (time: number, timenodeId?: string) => void;
+  clickHandler?: (time: number, timenodeId?: string) => void;
 };
 
 const Time = ({ time }: { time: string }) => {
@@ -30,7 +30,7 @@ const Item = ({
   type,
   title,
   isNewItem,
-  itemClickHandler,
+  clickHandler,
 }: Props) => {
   const iconType = isNewItem && !type ? 'default' : type;
   const formattedTime = time < 10 ? `0${time}:00` : `${time}:00`;
@@ -45,7 +45,7 @@ const Item = ({
         </TimelineDot>
         <TimelineConnector />
       </TimelineSeparator>
-      <TimelineContent onClick={() => itemClickHandler(time, timenodeId)}>
+      <TimelineContent onClick={() => clickHandler(time, timenodeId)}>
         <Node isNewItem={isNewItem} title={title} />
       </TimelineContent>
     </TimelineItem>
