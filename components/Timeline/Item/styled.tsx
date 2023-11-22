@@ -5,5 +5,5 @@ export const TimeWrapper = styled.div`
   justify-content: center;
   align-items: center;
   width: fit-content;
-  padding: 8px 12px;
+  padding: 8px;
 `;

@@ -7,14 +7,27 @@ type IconType = {
 };
 
 type DataType = {
-  title: string;
   fields: FieldType[];
   icons: IconType[];
   button: ButtonType;
 };
 
+export const title = { edit: '編輯紀錄', add: '新增紀錄' };
+
+export const timeFields: FieldType[] = [
+  {
+    name: 'startTime',
+    required: true,
+    type: 'time',
+  },
+  {
+    name: 'endTime',
+    required: true,
+    type: 'time',
+  },
+];
+
 const data: DataType = {
-  title: '編輯紀錄',
   fields: [
     {
       name: 'title',
@@ -51,7 +64,7 @@ const data: DataType = {
   ],
   button: {
     text: '儲存',
-  }
+  },
 };
 
 export default data;

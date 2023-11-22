@@ -27,8 +27,9 @@ import {
   IconGroup,
   IconOuter,
   IconWrapper,
+  TimeFieldWrapper,
 } from './styled';
-import data from './data';
+import data, { title, timeFields } from './data';
 
 type EditTimelineItemProps = {
   timenodeId?: string;
@@ -70,7 +71,6 @@ const EditTimeNode = ({ timenodeId, time }: EditTimelineItemProps) => {
       const submitData = {
         ...data,
         type: selectedType,
-        time,
         date: today,
         userId: userData?.id,
       };
@@ -85,7 +85,7 @@ const EditTimeNode = ({ timenodeId, time }: EditTimelineItemProps) => {
   };
 
   const { errors, handleError, handleFormData, submitHandler } = useForm(
-    data.fields,
+    [...timeFields, ...data.fields],
     onSubmit,
     isSuccess,
   );
@@ -95,8 +95,29 @@ const EditTimeNode = ({ timenodeId, time }: EditTimelineItemProps) => {
   return (
     <>
       <Typography variant="h6" align="center" marginBottom={2}>
-        {data.title}
+        {isNewItem ? title.add : title.edit}
       </Typography>
+      <TimeFieldWrapper>
+        {timeFields.map((field, idx) => {
+          const isStartTime = field.name === 'startTime';
+          const value = isStartTime ? time - 1 : time;
+          return (
+            <>
+              <Field
+                key={idx}
+                value={value}
+                errors={errors}
+                isReset={isSuccess}
+                handleError={handleError}
+                handleFormData={handleFormData}
+                size="small"
+                {...field}
+              />
+              {isStartTime && <span>~</span>}
+            </>
+          );
+        })}
+      </TimeFieldWrapper>
       <Wrapper onSubmit={submitHandler}>
         <InputWrapper>
           <IconWrapper>

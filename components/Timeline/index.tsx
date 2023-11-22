@@ -14,7 +14,7 @@ import { EDIT_TIMNODE } from '@/constants/modalType';
 import { colors } from '@/constants/styles';
 import Item from './Item';
 import Icon from '../Icon';
-import { AddButton } from './styled';
+import { Wrapper, AddButton } from './styled';
 
 type Props = {
   data: TimeNodeType[];
@@ -27,7 +27,7 @@ const Timeline = ({ data }: Props) => {
   const currentHour = time.hour();
   const hours = Array.from({ length: currentHour + 1 }, (_, i) => i);
   const items = hours.map((hour) => {
-    const item = data?.find((item) => hour >= item.endTime);
+    const item = data?.find((item) => hour <= item.endTime);
     if (item) {
       return { ...item, endTime: hour, isNewItem: false };
     }
@@ -55,7 +55,7 @@ const Timeline = ({ data }: Props) => {
   };
 
   return (
-    <>
+    <Wrapper>
       <TimelineWrapper position="right">
         {items.map((item, idx) => (
           <Item
@@ -76,7 +76,7 @@ const Timeline = ({ data }: Props) => {
           size={{ width: '30px', height: '30px' }}
         />
       </AddButton>
-    </>
+    </Wrapper>
   );
 };
 

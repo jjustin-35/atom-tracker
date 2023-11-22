@@ -38,3 +38,10 @@ export const IconWrapper = styled.div`
   background-color: #e0e0e0;
   cursor: pointer;
 `;
+
+export const TimeFieldWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+`;

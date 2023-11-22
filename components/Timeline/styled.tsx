@@ -1,5 +1,9 @@
 import styled from '@emotion/styled';
-import { colors, theme } from '@/constants/styles';
+import { theme } from '@/constants/styles';
+
+export const Wrapper = styled.div`
+  padding-bottom: 100px;
+`;
 
 export const AddButton = styled.div`
   position: fixed;
