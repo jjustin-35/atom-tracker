@@ -42,6 +42,17 @@ export const IconWrapper = styled.div`
 export const TimeFieldWrapper = styled.div`
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 8px;
   margin-bottom: 8px;
+
+  input {
+    width: 40px;
+    text-align: center;
+  }
+
+  span {
+    white-space: nowrap;
+  }
 `;
+

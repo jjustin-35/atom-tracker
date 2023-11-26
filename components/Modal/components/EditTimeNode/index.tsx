@@ -113,6 +113,7 @@ const EditTimeNode = ({ timenodeId, time }: EditTimelineItemProps) => {
                 size="small"
                 {...field}
               />
+              <span>小時</span>
               {isStartTime && <span>~</span>}
             </>
           );

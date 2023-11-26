@@ -18,12 +18,20 @@ export const timeFields: FieldType[] = [
   {
     name: 'startTime',
     required: true,
-    type: 'time',
+    type: 'number',
+    inputProps: {
+      min: 0,
+      max: 23,
+    }
   },
   {
     name: 'endTime',
     required: true,
-    type: 'time',
+    type: 'nmber',
+    inputProps: {
+      min: 0,
+      max: 23,
+    }
   },
 ];
 
