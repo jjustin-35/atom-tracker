@@ -1,1 +1,1 @@
-export const EDIT_TIMNODE = 'EDIT_TIMENODE';
+export const EDIT_TIMENODE = 'EDIT_TIMENODE';

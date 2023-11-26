@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import { ModalTypes } from '../../../constants/types/modal';
-import { EDIT_TIMNODE } from '@/constants/modalType';
+import { EDIT_TIMENODE } from '@/constants/modalType';
 import EditTimeNode from './EditTimeNode';
 
 type Props = {
@@ -9,7 +9,7 @@ type Props = {
 };
 
 const components: Record<ModalTypes, FC> = {
-  [EDIT_TIMNODE]: EditTimeNode,
+  [EDIT_TIMENODE]: EditTimeNode,
 };
 
 const ModalComponent = ({ type, modalProps }: Props) => {

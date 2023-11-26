@@ -32,11 +32,12 @@ import {
 import data, { title, timeFields } from './data';
 
 type EditTimelineItemProps = {
-  timenodeId?: string;
   time: number;
+  timenodeId?: string;
+  isAddItem?: boolean;
 };
 
-const EditTimeNode = ({ timenodeId, time }: EditTimelineItemProps) => {
+const EditTimeNode = ({ time, timenodeId, isAddItem }: EditTimelineItemProps) => {
   const router = useRouter();
   const { data: timeNodeResp, error } = useGetTimeNodeQuery(timenodeId);
   const [postTimeNode, postResult] = usePostTimeNodeMutation();
@@ -81,7 +82,7 @@ const EditTimeNode = ({ timenodeId, time }: EditTimelineItemProps) => {
     // asynchronous refresh timeline
     setTimeout(() => {
       router.refresh();
-    }, 500);
+    }, 300);
   };
 
   const { errors, handleError, handleFormData, submitHandler } = useForm(
@@ -95,12 +96,13 @@ const EditTimeNode = ({ timenodeId, time }: EditTimelineItemProps) => {
   return (
     <>
       <Typography variant="h6" align="center" marginBottom={2}>
-        {isNewItem ? title.add : title.edit}
+        {isAddItem ? title.add : title.edit}
       </Typography>
       <TimeFieldWrapper>
         {timeFields.map((field, idx) => {
           const isStartTime = field.name === 'startTime';
-          const value = isStartTime ? time - 1 : time;
+          const startTime = time - 1 < 0 ? 23 : time - 1;
+          const value = isStartTime ? startTime : time;
           return (
             <>
               <Field

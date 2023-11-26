@@ -31,9 +31,8 @@ const Field = ({
   }, [isReset]);
 
   useEffect(() => {
-    if (value) {
-      setValue(value);
-    }
+    if (value !== 0 && !value) return;
+    setValue(value);
   }, [value]);
 
   useEffect(() => {

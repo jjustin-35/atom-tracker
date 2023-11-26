@@ -10,7 +10,7 @@ import {
   ModalStateType,
   openModal as openModalAction,
 } from '@/redux/slices/modal';
-import { EDIT_TIMNODE } from '@/constants/modalType';
+import { EDIT_TIMENODE } from '@/constants/modalType';
 import { colors } from '@/constants/styles';
 import Item from './Item';
 import Icon from '../Icon';
@@ -40,16 +40,17 @@ const Timeline = ({ data }: Props) => {
   });
 
   const addHandler = () => {
-    const time = dayjs().hour();
+    const time = dayjs().hour() + 1;
+
     openModal({
-      modalType: EDIT_TIMNODE,
-      modalProps: { time },
+      modalType: EDIT_TIMENODE,
+      modalProps: { time, isAddItem: true },
     });
   };
 
   const clickHandler = (time: number, timenodeId?: TimeNodeType['id']) => {
     openModal({
-      modalType: EDIT_TIMNODE,
+      modalType: EDIT_TIMENODE,
       modalProps: { timenodeId, time },
     });
   };
