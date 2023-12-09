@@ -8,6 +8,7 @@ import FitnessCenterIcon from '@mui/icons-material/FitnessCenter';
 import HomeIcon from '@mui/icons-material/Home';
 import CategoryIcon from '@mui/icons-material/Category';
 import AddIcon from '@mui/icons-material/Add';
+import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 
 type IconComponentType = typeof QuestionMarkIcon;
 
@@ -20,6 +21,7 @@ const IconsData: Record<TimeNodeVariantType, IconComponentType> = {
   life: HomeIcon,
   others: CategoryIcon,
   add: AddIcon,
+  date: CalendarMonthIcon,
 };
 
 export default IconsData;

@@ -1,36 +1,24 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/dist/query/react';
 import { ApiResponse, TimeNodeType } from '../../constants/types/api';
 
+type TimelineParams = {
+  userId: TimeNodeType['userId'];
+  date: TimeNodeType['date'];
+};
+
 const timelineApi = createApi({
   reducerPath: 'timelineApi',
   baseQuery: fetchBaseQuery({
     baseUrl: '/api/timeline',
   }),
   endpoints: (builder) => ({
-    getTimeNode: builder.query<ApiResponse<TimeNodeType>, string | null>({
-      query: (id) => id && `/?id=${id}`,
-    }),
-    postTimeNode: builder.mutation<void, TimeNodeType>({
-      query: (data) => ({
-        url: '/',
-        method: 'POST',
-        body: data,
-      }),
-    }),
-    putTimeNode: builder.mutation<void, TimeNodeType>({
-      query: (data) => ({
-        url: '/',
-        method: 'PUT',
-        body: data,
-      }),
+    getTimeline: builder.query<ApiResponse<TimeNodeType[]>, TimelineParams>({
+      query: (params) =>
+        params && `/?userId=${params.userId}&date=${params.date}`,
     }),
   }),
 });
 
-export const {
-  useGetTimeNodeQuery,
-  usePostTimeNodeMutation,
-  usePutTimeNodeMutation,
-} = timelineApi;
+export const { useGetTimelineQuery } = timelineApi;
 
 export default timelineApi;

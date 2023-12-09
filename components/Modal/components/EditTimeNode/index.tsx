@@ -13,7 +13,7 @@ import {
   useGetTimeNodeQuery,
   usePostTimeNodeMutation,
   usePutTimeNodeMutation,
-} from '@/redux/apis/timeline';
+} from '@/redux/apis/timenode';
 import { useGetUserQuery } from '@/redux/apis/auth';
 import { DATE_FORMAT } from '@/constants/timeFormat';
 import { isEmptyObj } from '@/helpers/object';

@@ -12,7 +12,7 @@ export const getTimeline = async (
           date,
         },
         orderBy: {
-          time: 'desc',
+          endTime: 'desc',
         },
       });
   
