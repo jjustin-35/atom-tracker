@@ -2,7 +2,7 @@ import { getServerSession } from 'next-auth';
 import dayjs from 'dayjs';
 
 import { DATE_FORMAT } from '@/constants/timeFormat';
-import { getTimeline } from '@/apis/timeline';
+import { getTimeline as getTimelineApi } from '@/apis/timeline';
 import { getUser } from '@/apis/auth';
 import Timeline from '@/components/Timeline';
 
@@ -13,10 +13,14 @@ const TimelineContainer = async () => {
     const user = await getUser(email);
     if (!user) return null;
 
-    const today = dayjs().format(DATE_FORMAT);
-    const data = await getTimeline(user.id, today);
+    const getTimeline = async (userId: string, date: string) => {
+      const data = await getTimelineApi(userId, date);
+      return data;
+    }
 
-    return <Timeline data={data} />;
+    const data = await getTimeline(user.id, dayjs().format(DATE_FORMAT));
+
+    return <Timeline data={data} getTimeline={getTimeline} />;
   } catch (err) {
     console.log(err);
     return null;

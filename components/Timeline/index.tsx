@@ -18,9 +18,10 @@ import { Wrapper, AddButton } from './styled';
 
 type Props = {
   data: TimeNodeType[];
+  getTimeline: (userId: string, date: string) => Promise<TimeNodeType[]>;
 };
 
-const Timeline = ({ data }: Props) => {
+const Timeline = ({ data, getTimeline }: Props) => {
   const dispatch = useDispatch();
   const openModal = (data: ModalStateType) => dispatch(openModalAction(data));
   const time = dayjs();
